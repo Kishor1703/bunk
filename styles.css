@@ -977,13 +977,35 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Add responsive scroll on mobile */
 @media (max-width: 650px) {
-  table, thead, tbody, th, td, tr {
+  .table-container {
+    /* Show horizontal scrollbar always for usability */
+    /* overflow-x: scroll; */
+  }
+  table {
+    min-width: 380px; /* Allows table to shrink further on small screens */
     font-size: 0.92rem;
   }
   thead th, tbody td {
     padding: 0.5rem 0.7rem;
+    font-size: 0.92rem;
+    word-break: break-word;
+  }
+  /* Make wrapping less harsh for numeric/cell values */
+  td, th {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .table1,
+  .table-container {
+    padding: 0 8px;
+ margin-bottom: 2rem;
+  }
+  table {
+    min-width: 250px; /* Allows table to shrink further on small screens */
+    font-size: 0.92rem;
   }
 }
 
