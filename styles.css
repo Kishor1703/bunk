@@ -924,12 +924,6 @@ html {
     transform: translateY(0);
 }
 
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      line-height: 1.5;
-    }
     h1 {
       text-align: center;
       margin-bottom: 30px;
