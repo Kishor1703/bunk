@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Continental Tyre Price List</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="images/Senthil Service Station Logo.png">
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -81,7 +82,13 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800 p-4 sm:p-8">
-
+<button onclick="goBack()" class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
+                <!-- SVG Icon for the Back Arrow -->
+                <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span>Back to Previous Page</span>
+            </button>
     <!-- Firebase Initialization (Required for the environment, even if not used for data) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -213,6 +220,17 @@
                 </div>
             `;
             return tableHTML;
+        }
+function goBack() {
+            // Check if there is history to navigate back to (length > 1 means a previous page exists)
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // If there's no history, use a console warning or redirect to a known home page.
+                console.warn("Cannot go back: This is the first page in history.");
+                // Note: For a real application, you might redirect to an index page here: 
+                // window.location.href = '/index.html'; 
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {

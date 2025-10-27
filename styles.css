@@ -18,14 +18,14 @@ body {
 
 /* Modern Navbar Styles (Updated: larger logo, glass card layout) */
 .header {
-    position:relative;
+    position:fixed;
     padding-bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 40px);
     max-width: 1200px;
     z-index: 120;
-    background: rgba(255,255,255,0.96);
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 10px;
     box-shadow: 0 6px 20px rgba(2,6,23,0.08);
     border: 1px solid rgba(2,6,23,0.06);
@@ -968,7 +968,7 @@ thead th {
 /* --- Table Body (tbody) --- */
 tbody td {
     padding: 1rem 1rem;
-    /* Darker, more visible border, applied to bottom and right */
+    
     border: 1px solid #c7d3d8; 
     border-width: 0 1px 1px 0; 
     font-size: 0.95rem;

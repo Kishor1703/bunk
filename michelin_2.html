@@ -6,6 +6,7 @@
     <title>Michelin 2WH Price List</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="images/Senthil Service Station Logo.png">
     <script>
         tailwind.config = {
             theme: {
@@ -21,12 +22,101 @@
             }
         }
     </script>
+    
 </head>
+<style>
+        /* Custom Styles for better table appearance and responsiveness */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            text-align: center;
+        }
+        .table-container {
+            max-width: 100%;
+            padding: 40px;
+            -webkit-overflow-scrolling: touch;
+            max-height: 800px; 
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+        th, td {
+            /* Ensure content fits without wrapping unnecessarily */
+            white-space: nowrap; 
+            text-align: center;
+        }
+        tr{
+            text-align: center;
+        }
+        .header-bg {
+            background-color: #0C356A; /* Yokohama Red (approx) */
+        }
+        .segment-header {
+             /* Dark Gray for segment title rows */
+            color: black;
+            font-weight: 700;
+            text-align: center;
+        }
+         @media (max-width: 768px) {
+        body {
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 8px 10px;
+        }
+
+        table {
+            max-width: 200px;
+        }
+
+        .table-container {
+            padding: 6px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            font-size: 12px;
+        }
+
+        th, td {
+            padding: 6px 8px;
+        }
+
+        table {
+            max-width: 500px;
+        }
+
+        .segment-header {
+            font-size: 13px;
+            padding: 8px;
+        }
+
+        th {
+            font-size: 13px;
+        }
+      }
+    </style>
+
 <body>
-<div class="table-responsive">
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <button onclick="goBack()" class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
+                <!-- SVG Icon for the Back Arrow -->
+                <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span>Back to Previous Page</span>
+            </button>
+<div class="table-container">
     <h2 class="text-3xl sm:text-4xl font-extrabold text-continental-blue" style="padding-bottom: 30px;padding-top: 30px; text-align: center;">Michelin 2WH Consumer Price List </h2>
-    <table>
-        <thead>
+    <table class="w-full text-sm text-gray-700 divide-y divide-gray-300" >
+        <thead class="text-xs uppercase text-white">
             <tr>
                 <th>Segment</th>
                 <th>Dim Box</th>
