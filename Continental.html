@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continental Tyre Price List</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'continental-blue': '#002B5F',
+                        'continental-gold': '#FDD000',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for better table visibility and fixed header on large screens */
+        .table-container {
+            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            overflow-y: auto;
+            padding-top: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .table-container thead th {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background-color: #002B5F; /* continental-blue */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* Mobile-first: Making the table responsive by using data attributes */
+        @media (max-width: 767px) {
+            .mobile-table tr {
+                display: block;
+                margin-bottom: 1.5rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-table thead {
+                display: none; /* Hide standard headers on mobile */
+            }
+
+            .mobile-table td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border-bottom: 1px solid #f3f4f6;
+            }
+
+            .mobile-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: #4b5563;
+            }
+            .mobile-table td:last-child {
+                border-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 p-4 sm:p-8">
+
+    <!-- Firebase Initialization (Required for the environment, even if not used for data) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // Define global variables from the canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+
+        async function initFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length > 0) {
+                    const app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                    console.log('Firebase initialized and authenticated.');
+                }
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+            }
+        }
+        initFirebase();
+    </script>
+    
+   
+
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-continental-blue">Continental Tyre Price List</h1>
+        </div>
+
+        <main id="app-container" class="space-y-12">
+            
+        </main>
+        
+        <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p>Prices are Valid for Tubeless Tyres Only.</p>
+            <p>Prices are liable to change without notice and those prevailing at the time of invoicing/dispatch will be applicable.</p>
+            <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
+                <span class="font-semibold">Key:</span>
+                LI/SI: Load Index/Speed | FR: Flange Rib | XL: Extra load
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Data extracted from the PDF pages 1-4.
+        const tyreData = {
+            'Passenger Car Tyres': [
+                ['145/80R13', '3116040000', '75T', 'ComfortContact CC6', '3,628'],
+                ['155/65R13', '3116050000', '73T', 'ComfortContact CC6', '3,806'],
+                ['155/70R13', '3116070000', '75T', 'ComfortContact CC6', '3,969'],
+                ['165/65R13', '3116090000', '77T', 'ComfortContact CC6', '3,973'],
+                ['175/70R13', '3116140000', '82T', 'ComfortContact CC6', '5,015'],
+                ['165/65R14', '3116100000', '79T', 'ComfortContact CC6', '4,761'],
+                ['165/65R14', '3116220000', '79H', 'UltraContact UC6', '4,761'],
+                ['175/65R14', '3116210000', '82H', 'UltraContact UC6', '5,513'],
+                ['185/65R14', '3116250000', '86H', 'UltraContact UC6', '5,235'],
+                ['195/65R14', '3116260000', '89H', 'UltraContact UC6', '5,571'],
+                ['175/65R15', '3116230000', '84H', 'UltraContact UC6', '6,019'],
+                ['185/65R15', '3116270000', '88H', 'UltraContact UC6', '6,439'],
+                ['195/55R15', '3116280000', '85V', 'UltraContact UC6', '6,798'],
+                ['205/55R16', '3116380000', '91V', 'UltraContact UC6 FR', '9,391'],
+                ['215/55R16', '3116410000', '93V', 'UltraContact UC6 FR', '10,711'],
+                ['205/45R17', '3116440000', '84W', 'UltraContact UC6 FR', '10,065'],
+                ['225/50R17', '3144840000', '98W', 'PremiumContact PC6 XL FR', '12,353'],
+                ['235/40R18', '3144750000', '95W', 'Premium Contact PC6 FR', '18,073'],
+                ['245/45R19', '3144770000', '98Y', 'PremiumContact PC6 FR', '22,589'],
+                ['275/40R19', '3133510000', '101Y', 'ContiSportContact SC5 FR', '27,423']
+            ],
+            'SUV Tyres': [
+                ['205/70R15', '3541870000', '96T', 'Conti4x4Contact 4x4C', '7,364'],
+                ['215/75R15', '4711760000', '100T', 'ContiCrossContact CCAX6', '7,654'],
+                ['235/75R15', '4711790000', '109T', 'ContiCrossContact CCAX6 XL FR', '8,350'],
+                ['215/65R16', '4711750000', '98H', 'ContiCrossContact CCAX6 FR', '10,672'],
+                ['235/60R16', '3596670000', '100H', 'ContiCrossContact CCH/T FR', '9,421'],
+                ['245/70R16', '4711800000', '111H', 'ContiCrossContact CCAX6 FR', '9,958'],
+                ['215/60R17', '3596570000', '96H', 'ContiCrossContact CCH/T FR', '10,982'],
+                ['225/60R17', '4711890000', '99V', 'ContiCrossContact CCAX6 FR', '11,933'],
+                ['235/65R17', '3596580000', '108H', 'ContiCrossContact CCH/T XL FR', '13,917'],
+                ['265/65R17', '4711860000', '112T', 'ContiCrossContact CCAX6 FR', '14,223'],
+                ['235/60R18', '3144760000', '103V', 'PremiumContact PC6 FR', '16,480'],
+                ['235/50R18', '3133710000', '97V', 'ContiSportContact SC5 SUV FR', '19,919'],
+                ['255/55R18', '4711680000', '109Y', 'ContiCrossContact CCUHP XL FR', '19,234'],
+                ['265/60R18', '3596690000', '114H', 'ContiCrossContact CCH/T XL FR', '18,171'],
+                ['235/55R19', '3144900000', '105V', 'PremiumContact PC6 XL FR', '18,659'],
+                ['255/50R19', '3591840000', '107Y', 'ContiCrossContact CCUHP XL FR', '20,531'],
+                ['275/55R19', '3133730000', '111W', 'ContiSportContact SC5 SUV FR', '23,755'],
+                ['275/50R20', '3144890000', '113W', 'Premium Contact PC6 XL FR', '25,427']
+            ]
+        };
+
+        const headers = ['Dimension / Size', 'Material Code', 'LI/SI', 'Pattern', 'Price (INR)'];
+
+        function createTable(title, data) {
+            let tableHTML = `
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                    <h2 class="text-2xl font-bold p-4 bg-continental-blue text-white rounded-t-xl">${title}</h2>
+                    <div class="table-container p-4">
+                        <table class="w-full text-sm text-left text-gray-700 mobile-table">
+                            <thead class="text-xs text-white uppercase bg-continental-blue shadow-md">
+                                <tr>
+                                    ${headers.map(header => `<th scope="col" class="py-3 px-3">${header}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map((row, index) => `
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
+                                        <td data-label="${headers[0]}" class="py-3 px-3 font-medium text-gray-900">${row[0]}</td>
+                                        <td data-label="${headers[1]}" class="py-3 px-3">${row[1]}</td>
+                                        <td data-label="${headers[2]}" class="py-3 px-3">${row[2]}</td>
+                                        <td data-label="${headers[3]}" class="py-3 px-3 font-semibold">${row[3]}</td>
+                                        <td data-label="${headers[4]}" class="py-3 px-3 text-continental-blue font-extrabold text-right">${row[4]}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            return tableHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('app-container');
+            if (container) {
+                // Generate Passenger Car Tyres Table
+                container.innerHTML += createTable('Continental Passenger Car Tyres', tyreData['Passenger Car Tyres']);
+                // Generate SUV Tyres Table
+                container.innerHTML += createTable('Continental SUV Tyres', tyreData['SUV Tyres']);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michelin Passenger Car Price List</title>
+   <link rel="stylesheet" href="styles.css">
+   <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'continental-blue': '#002B5F',
+                        'continental-gold': '#FDD000',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="table-container">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-continental-blue" style="padding-bottom: 30px;padding-top: 30px; text-align: center;">Michelin Passenger Car Price List</h2>
+
+    <table class="table-container" id="myTable">
+         
+        <thead>
+            <tr>
+                <th>Size</th>
+                <th>Product Description</th>
+                <th>Pattern</th>
+                <th>Rim Size</th>
+                <th>RCP (in INR)</th>
+                <th>MRP (in INR)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>285/45R22</td><td>285/45R22 114YXL PS4 SUVRG</td><td>PILOT SPORT 4 SUV</td><td>22</td><td>45,700</td><td>48,000</td></tr>
+            <tr><td>315/40R21</td><td>315/40R21 111Y TL LATITUDE SPORT 3 MO GRNX MI</td><td>LATITUDE SPORT 3</td><td>21</td><td>42,550</td><td>44,700</td></tr>
+            <tr><td>315/35R21</td><td>315/35R21 111Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>37,750</td><td>39,650</td></tr>
+            <tr><td>295/35R21</td><td>295/35R21 107Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>40,050</td><td>42,100</td></tr>
+            <tr><td>285/45R21</td><td>285/45ZR21 (113Y) XL TL PILOT SPORT 4 SUV NCO MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>41,450</td><td>43,550</td></tr>
+            <tr><td>285/45R21</td><td>285/45R21 113Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>40,950</td><td>43,000</td></tr>
+            <tr><td>285/40R21</td><td>285/40R21 109Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>37,350</td><td>39,250</td></tr>
+            <tr><td>275/50R21</td><td>275/50R21 113V XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>38,000</td><td>39,900</td></tr>
+            <tr><td>275/45R21</td><td>275/45R21 107Y TL LATITUDE SPORT 3 MO GRNX MI</td><td>LATITUDE SPORT 3</td><td>21</td><td>37,200</td><td>39,100</td></tr>
+            <tr><td>275/40R21</td><td>275/40R21 107Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>35,450</td><td>37,250</td></tr>
+            <tr><td>305/40R20</td><td>305/40R20 112Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>32,750</td><td>34,400</td></tr>
+            <tr><td>295/40R20</td><td>295/40R20 110Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>30,900</td><td>32,450</td></tr>
+            <tr><td>295/30ZR20</td><td>295/30ZR20 (101Y) XL TL PILOT SPORT 4S MO1 MI</td><td>PILOT SPORT 4S</td><td>20</td><td>34,900</td><td>36,650</td></tr>
+            <tr><td>285/50R20</td><td>285/50R20 116W XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>27,500</td><td>28,900</td></tr>
+            <tr><td>275/50ZR20</td><td>275/50ZR20 113YXL PILOT SPORT 4 SUV MO1</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>31,100</td><td>32,700</td></tr>
+            <tr><td>275/45R20</td><td>275/45R20 110YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>28,150</td><td>29,600</td></tr>
+            <tr><td>275/45R20</td><td>275/45R20 110V XL PILOT SPORT 4 SUV VOL MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>25,100</td><td>26,400</td></tr>
+            <tr><td>275/35ZR20</td><td>275/35ZR20 102Y XL TL PILOT SPORT 4 ZP MI</td><td>PILOT SPORT 4</td><td>20</td><td>33,050</td><td>34,750</td></tr>
+            <tr><td>255/55R20</td><td>255/55R20 110YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>30,250</td><td>31,800</td></tr>
+            <tr><td>255/50R20</td><td>255/50R20 109YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>27,200</td><td>28,600</td></tr>
+            <tr><td>255/45R20</td><td>255/45R20 105W XL PILOT SPORT EV ACOUSTIC GOE MI</td><td>PILOT SPORT EV</td><td>20</td><td>27,700</td><td>29,100</td></tr>
+            <tr><td>245/45R20</td><td>245/45R20 103Y XL TL PILOT SPORT 4 NFO MI</td><td>PILOT SPORT 4</td><td>20</td><td>28,200</td><td>29,650</td></tr>
+            <tr><td>245/40ZR20</td><td>245/40ZR20 99Y XL TL PILOT SPORT 4 ZP MI</td><td>PILOT SPORT 4</td><td>20</td><td>30,900</td><td>32,450</td></tr>
+            <tr><td>285/45R19</td><td>285/45R19 111W XL TL LATITUDE SPORT 3 ZP GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>34,200</td><td>35,950</td></tr>
+            <tr><td>275/55R19</td><td>275/55R19 111W LATITUDE SPORT MO</td><td>LATITUDE SPORT</td><td>19</td><td>28,900</td><td>30,350</td></tr>
+            <tr><td>275/40R19</td><td>275/40R19 101Y TL PRIMACY 3 ZP S1 GRNX MI</td><td>PRIMACY 3</td><td>19</td><td>34,750</td><td>36,500</td></tr>
+            <tr><td>265/50R19</td><td>265/50R19 110YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>27,750</td><td>29,150</td></tr>
+            <tr><td>255/55R19</td><td>255/55R19 111YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>24,100</td><td>25,350</td></tr>
+            <tr><td>255/50R19</td><td>255/50R19 107W XL TL LATITUDE SPORT 3 ZP GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>33,200</td><td>34,900</td></tr>
+            <tr><td>255/50R19</td><td>255/50R19 103Y TL LATITUDE SPORT 3 NO GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>26,850</td><td>28,200</td></tr>
+            <tr><td>255/50R19</td><td>255/50R19 103Y LATITUDE SPORT3 MO1</td><td>LATITUDE SPORT 3</td><td>19</td><td>25,550</td><td>26,850</td></tr>
+            <tr><td>255/50R19</td><td>255/50R19 107Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>23,300</td><td>24,500</td></tr>
+            <tr><td>245/50R19</td><td>245/50R19 105W XL TL LATITUDE SPORT 3 ZP* GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>32,050</td><td>33,700</td></tr>
+            <tr><td>245/45R19</td><td>245/45R19 98Y PRIMACY 3 S1 ZP</td><td>PRIMACY 3</td><td>19</td><td>31,050</td><td>32,650</td></tr>
+            <tr><td>245/45R19</td><td>245/45ZR19 (102Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>19</td><td>20,550</td><td>21,600</td></tr>
+            <tr><td>245/45R19</td><td>245/45R19 102W EXTRA LOAD TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>19</td><td>20,150</td><td>21,200</td></tr>
+            <tr><td>245/40R19</td><td>245/40R19 98Y XL TL PRIMACY 3 ZP*MOE GRNX MI</td><td>PRIMACY 3</td><td>19</td><td>33,850</td><td>35,550</td></tr>
+            <tr><td>245/40R19</td><td>245/40R19 98Y EXTRA LOAD TL PRIMACY 3* MO GRNX MI</td><td>PRIMACY 3</td><td>19</td><td>24,450</td><td>25,700</td></tr>
+            <tr><td>235/55R19</td><td>235/55R19 105YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>21,750</td><td>22,850</td></tr>
+            <tr><td>225/55R19</td><td>225/55R19 99V TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>19</td><td>15,550</td><td>16,350</td></tr>
+            <tr><td>285/60R18</td><td>285/60R18 116T TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>18</td><td>22,000</td><td>23,100</td></tr>
+            <tr><td>285/60R18</td><td>285/60R18 116V TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>18</td><td>20,450</td><td>21,500</td></tr>
+            <tr><td>285/35ZR18</td><td>285/35ZR18 (101Y) XL TL PILOT SUPER SPORT MO1 MI</td><td>PILOT SUPER SPORT</td><td>18</td><td>31,800</td><td>33,400</td></tr>
+            <tr><td>275/40R18</td><td>275/40R18 99Y TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>30,550</td><td>32,100</td></tr>
+            <tr><td>265/60R18</td><td>265/60R18 110H TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>18</td><td>19,550</td><td>20,550</td></tr>
+            <tr><td>265/60R18</td><td>265/60R18 110T TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>18</td><td>19,250</td><td>20,250</td></tr>
+            <tr><td>255/55R18</td><td>255/55R18 109V XL TL LATITUDE SPORT 3 ZP GRNX MI</td><td>LATITUDE SPORT 3</td><td>18</td><td>30,500</td><td>32,050</td></tr>
+            <tr><td>255/55R18</td><td>255/55R18 109YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>18</td><td>20,950</td><td>22,000</td></tr>
+            <tr><td>255/40R18</td><td>255/40ZR18 (99Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>18,000</td><td>18,900</td></tr>
+            <tr><td>245/50R18</td><td>245/50R18 100W PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>18</td><td>21,000</td><td>22,050</td></tr>
+            <tr><td>245/50R18</td><td>245/50R18 100Y TL PRIMACY 3 ZP GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>24,800</td><td>26,050</td></tr>
+            <tr><td>245/45R18</td><td>245/45R18 100YXL PRIMACY 3 MOE ZP</td><td>PRIMACY 3</td><td>18</td><td>22,250</td><td>23,400</td></tr>
+            <tr><td>245/45R18</td><td>245/45R18 100W EXTRA LOAD TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>18</td><td>15,650</td><td>16,450</td></tr>
+            <tr><td>245/40R18</td><td>245/40R18 97Y EXTRA LOAD TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>24,200</td><td>25,450</td></tr>
+            <tr><td>245/40R18</td><td>245/40ZR18 (97Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>18,600</td><td>19,550</td></tr>
+            <tr><td>235/60R18</td><td>235/60R18 103V PRIMACY SUV+</td><td>PRIMACY SUV+</td><td>18</td><td>16,350</td><td>17,200</td></tr>
+            <tr><td>235/60R18</td><td>235/60R18 107W XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>18</td><td>19,500</td><td>20,500</td></tr>
+            <tr><td>235/55R18</td><td>235/55R18 104VXL LATITUDE SPORT 3 VOL</td><td>LATITUDE SPORT 3</td><td>18</td><td>21,900</td><td>23,000</td></tr>
+            <tr><td>235/50R18</td><td>235/50R18 97W TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>18</td><td>19,950</td><td>20,950</td></tr>
+            <tr><td>235/45R18</td><td>235/45ZR18 (98Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>18,050</td><td>19,000</td></tr>
+            <tr><td>225/55R18</td><td>225/55R18 102Y XL TL PRIMACY 4 AO1 MI</td><td>PRIMACY 4</td><td>18</td><td>20,100</td><td>21,150</td></tr>
+            <tr><td>225/50R18</td><td>225/50ZR18 (99Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>16,650</td><td>17,500</td></tr>
+            <tr><td>225/45R18</td><td>225/45R18 95Y EXTRA LOAD TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>23,050</td><td>24,250</td></tr>
+            <tr><td>225/45R18</td><td>225/45ZR18 (95Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>17,550</td><td>18,450</td></tr>
+            <tr><td>215/55R18</td><td>215/55R18 99V XL TL PRIMACY 4 VOL MI</td><td>PRIMACY 4 ST</td><td>18</td><td>14,950</td><td>15,700</td></tr>
+            <tr><td>265/65R17</td><td>265/65R17 112H TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>17</td><td>16,300</td><td>17,150</td></tr>
+            <tr><td>265/65R17</td><td>265/65R17 112T TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>17</td><td>16,250</td><td>17,100</td></tr>
+            <tr><td>245/65R17</td><td>245/65R17 107H TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>17</td><td>15,850</td><td>16,650</td></tr>
+            <tr><td>245/45R17</td><td>245/45R17 99WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>14,300</td><td>15,050</td></tr>
+            <tr><td>235/65R17</td><td>235/65R17 108T XL TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>17</td><td>14,800</td><td>15,550</td></tr>
+            <tr><td>235/65R17</td><td>235/65R17 108V EXTRA LOAD TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>17</td><td>14,650</td><td>15,400</td></tr>
+            <tr><td>235/55R17</td><td>235/55R17 103WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>15,450</td><td>16,250</td></tr>
+            <tr><td>225/65R17</td><td>225/65R17 106H XL TL PRIMACY SUV+ M</td><td>PRIMACY SUV+</td><td>17</td><td>11,350</td><td>11,950</td></tr>
+            <tr><td>225/55R17</td><td>225/55R17 97Y TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>17</td><td>21,250</td><td>22,350</td></tr>
+            <tr><td>225/55R17</td><td>225/55R17 101WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>13,350</td><td>14,050</td></tr>
+            <tr><td>225/50ZR17</td><td>225/50ZR17 (98Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>17</td><td>13,700</td><td>14,400</td></tr>
+            <tr><td>225/45ZR17</td><td>225/45ZR17 (94Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>17</td><td>13,150</td><td>13,850</td></tr>
+            <tr><td>215/60R17</td><td>215/60R17 96V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>11,850</td><td>12,450</td></tr>
+            <tr><td>215/55R17</td><td>215/55R17 94V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>13,600</td><td>14,300</td></tr>
+            <tr><td>215/50R17</td><td>215/50R17 95WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>13,500</td><td>14,200</td></tr>
+            <tr><td>215/45R17</td><td>215/45R17 91WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>10,750</td><td>11,300</td></tr>
+            <tr><td>225/55R16</td><td>225/55R16 99W EXTRA LOAD TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>16</td><td>11,450</td><td>11,900</td></tr>
+            <tr><td>215/60R16</td><td>215/60R16 99VXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>9,800</td><td>10,150</td></tr>
+            <tr><td>205/65R16</td><td>205/65R16 95V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>8,650</td><td>9,000</td></tr>
+            <tr><td>205/65R16</td><td>205/65R16 95H TL ENERGY XM2 + MI</td><td>ENERGY XM2+</td><td>16</td><td>8,400</td><td>8,700</td></tr>
+            <tr><td>205/60R16</td><td>205/60R16 92V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>9,100</td><td>9,450</td></tr>
+            <tr><td>205/55R16</td><td>205/55R16 91W TL PRIMACY 3 ZP GRNX MI</td><td>PRIMACY 3</td><td>16</td><td>12,650</td><td>13,100</td></tr>
+            <tr><td>205/55ZR16</td><td>205/55ZR16 94WXL PILOT SPORT 4 ST</td><td>PILOT SPORT 4 ST</td><td>16</td><td>11,350</td><td>11,750</td></tr>
+            <tr><td>205/55R16</td><td>205/55R16 91W TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>16</td><td>10,900</td><td>11,300</td></tr>
+            <tr><td>195/55R16</td><td>195/55R16 91VXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>9,550</td><td>9,900</td></tr>
+            <tr><td>185/65R15</td><td>185/65R15 88H TL ENERGY XM2 + MI</td><td>ENERGY XM2+</td><td>15</td><td>8,100</td><td>8,400</td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
