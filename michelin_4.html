@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michelin Passenger Car Price List</title>
-   <link rel="stylesheet" href="styles.css">
-   <script src="https://cdn.tailwindcss.com"></script>
-   <link rel="shortcut icon" href="images/Senthil Service Station Logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="images/Senthil Service Station Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -15,208 +15,279 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'continental-blue': '#002B5F',
+                        'continental-blue': '#002B5F', // Reusing the color from the first example
                         'continental-gold': '#FDD000',
                     }
                 }
             }
         }
     </script>
-</head>
-  <style>
-        /* Custom Styles for better table appearance and responsiveness */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
+    <style>
+        /* Custom styles for better table visibility and fixed header on large screens */
         .table-container {
-            max-width: 100%;
-            padding: 40px;
-            -webkit-overflow-scrolling: touch;
-            max-height: 800px; 
+            max-height: 80vh; /* Limits table height for scrollability on large displays */
             overflow-y: auto;
-        }
-        
-        th, td {
-            /* Ensure content fits without wrapping unnecessarily */
-            white-space: nowrap; 
-        }
-        .header-bg {
-            background-color: #0C356A; /* Yokohama Red (approx) */
-        }
-        .segment-header {
-             /* Dark Gray for segment title rows */
-            color: black;
-            font-weight: 700;
-            text-align: center;
-        }
-         @media (max-width: 768px) {
-        body {
-            font-size: 14px;
+            padding-top: 10px;
         }
 
-        th, td {
-            padding: 8px 10px;
+        @media (min-width: 768px) {
+            .table-container thead th {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background-color: #002B5F; /* continental-blue */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
         }
 
-        table {
-            max-width: 200px;
-        }
+        /* Mobile-first: Making the table responsive by using data attributes */
+        @media (max-width: 767px) {
+            .mobile-table tr {
+                display: block;
+                margin-bottom: 1.5rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            }
 
-        .table-container {
-            padding: 6px;
-        }
-    }
+            .mobile-table thead {
+                display: none; /* Hide standard headers on mobile */
+            }
 
-    @media (max-width: 480px) {
-        body {
-            font-size: 12px;
-        }
+            .mobile-table td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border-bottom: 1px solid #f3f4f6;
+            }
 
-        th, td {
-            padding: 6px 8px;
+            .mobile-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: #4b5563;
+            }
+            .mobile-table td:last-child {
+                border-bottom: 0;
+            }
         }
-
-        table {
-            max-width: 500px;
-        }
-
-        .segment-header {
-            font-size: 13px;
-            padding: 8px;
-        }
-
-        th {
-            font-size: 13px;
-        }
-      }
     </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 p-4 sm:p-8">
+    <div class="fixed bottom-8 right-8 z-50">
+        <button onclick="goBack()" class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
+            <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-<body>
+        async function initFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length > 0) {
+                    const app = initializeApp(firebaseConfig);
+                    // db = getFirestore(app); // Kept for reference, though not used below
+                    // auth = getAuth(app); // Kept for reference, though not used below
+
+                    if (initialAuthToken) {
+                        // await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        // await signInAnonymously(auth);
+                    }
+                    console.log('Firebase initialized.');
+                }
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+            }
+        }
+        initFirebase();
+    </script>
+    
+
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-continental-blue">Michelin Passenger Car Price List</h1>
+        </div>
+
+        <main id="app-container" class="space-y-12">
+            </main>
+        
+        <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p>Prices are subject to change. Please confirm the final price at the time of purchase.</p>
+            <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
+                <span class="font-semibold">Key:</span>
+                RCP: Recommended Customer Price | MRP: Maximum Retail Price | TL: Tubeless | XL: Extra Load | MO/NCO/VOL/ACOUSTIC: OEM Marking
+            </div>
+        </footer>
+    </div>
 
     <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-    <div class="fixed bottom-8 right-8 z-50">
-            <button onclick="goBack()" class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
-                <!-- SVG Icon for the Back Arrow -->
-                <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-                <span>Back</span>
-            </button>
-        </div>
-<div class="table-container">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-continental-blue" style="padding-bottom: 30px;padding-top: 30px; text-align: center;">Michelin Passenger Car Price List</h2>
+        // Data extracted and structured for the Michelin table
+        const michelinData = [
+            ['285/45R22', '285/45R22 114YXL PS4 SUVRG', 'PILOT SPORT 4 SUV', '22', '45,700', '48,000'],
+            ['315/40R21', '315/40R21 111Y TL LATITUDE SPORT 3 MO GRNX MI', 'LATITUDE SPORT 3', '21', '42,550', '44,700'],
+            ['315/35R21', '315/35R21 111Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '21', '37,750', '39,650'],
+            ['295/35R21', '295/35R21 107Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '21', '40,050', '42,100'],
+            ['285/45R21', '285/45ZR21 (113Y) XL TL PILOT SPORT 4 SUV NCO MI', 'PILOT SPORT 4 SUV', '21', '41,450', '43,550'],
+            ['285/45R21', '285/45R21 113Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '21', '40,950', '43,000'],
+            ['285/40R21', '285/40R21 109Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '21', '37,350', '39,250'],
+            ['275/50R21', '275/50R21 113V XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '21', '38,000', '39,900'],
+            ['275/45R21', '275/45R21 107Y TL LATITUDE SPORT 3 MO GRNX MI', 'LATITUDE SPORT 3', '21', '37,200', '39,100'],
+            ['275/40R21', '275/40R21 107Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '21', '35,450', '37,250'],
+            ['305/40R20', '305/40R20 112Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '20', '32,750', '34,400'],
+            ['295/40R20', '295/40R20 110Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '20', '30,900', '32,450'],
+            ['295/30ZR20', '295/30ZR20 (101Y) XL TL PILOT SPORT 4S MO1 MI', 'PILOT SPORT 4S', '20', '34,900', '36,650'],
+            ['285/50R20', '285/50R20 116W XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '20', '27,500', '28,900'],
+            ['275/50ZR20', '275/50ZR20 113YXL PILOT SPORT 4 SUV MO1', 'PILOT SPORT 4 SUV', '20', '31,100', '32,700'],
+            ['275/45R20', '275/45R20 110YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '20', '28,150', '29,600'],
+            ['275/45R20', '275/45R20 110V XL TL PILOT SPORT 4 SUV VOL MI', 'PILOT SPORT 4 SUV', '20', '25,100', '26,400'],
+            ['275/35ZR20', '275/35ZR20 102Y XL TL PILOT SPORT 4 ZP MI', 'PILOT SPORT 4', '20', '33,050', '34,750'],
+            ['255/55R20', '255/55R20 110YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '20', '30,250', '31,800'],
+            ['255/50R20', '255/50R20 109YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '20', '27,200', '28,600'],
+            ['255/45R20', '255/45R20 105W XL TL PILOT SPORT EV ACOUSTIC GOE MI', 'PILOT SPORT EV', '20', '27,700', '29,100'],
+            ['245/45R20', '245/45R20 103Y XL TL PILOT SPORT 4 NFO MI', 'PILOT SPORT 4', '20', '28,200', '29,650'],
+            ['245/40ZR20', '245/40ZR20 99Y XL TL PILOT SPORT 4 ZP MI', 'PILOT SPORT 4', '20', '30,900', '32,450'],
+            ['285/45R19', '285/45R19 111W XL TL LATITUDE SPORT 3 ZP GRNX MI', 'LATITUDE SPORT 3', '19', '34,200', '35,950'],
+            ['275/55R19', '275/55R19 111W LATITUDE SPORT MO', 'LATITUDE SPORT', '19', '28,900', '30,350'],
+            ['275/40R19', '275/40R19 101Y TL PRIMACY 3 ZP S1 GRNX MI', 'PRIMACY 3', '19', '34,750', '36,500'],
+            ['265/50R19', '265/50R19 110YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '19', '27,750', '29,150'],
+            ['255/55R19', '255/55R19 111YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '19', '24,100', '25,350'],
+            ['255/50R19', '255/50R19 107W XL TL LATITUDE SPORT 3 ZP GRNX MI', 'LATITUDE SPORT 3', '19', '33,200', '34,900'],
+            ['255/50R19', '255/50R19 103Y TL LATITUDE SPORT 3 NO GRNX MI', 'LATITUDE SPORT 3', '19', '26,850', '28,200'],
+            ['255/50R19', '255/50R19 103Y LATITUDE SPORT3 MO1', 'LATITUDE SPORT 3', '19', '25,550', '26,850'],
+            ['255/50R19', '255/50R19 107Y XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '19', '23,300', '24,500'],
+            ['245/50R19', '245/50R19 105W XL TL LATITUDE SPORT 3 ZP* GRNX MI', 'LATITUDE SPORT 3', '19', '32,050', '33,700'],
+            ['245/45R19', '245/45R19 98Y PRIMACY 3 S1 ZP', 'PRIMACY 3', '19', '31,050', '32,650'],
+            ['245/45R19', '245/45ZR19 (102Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '19', '20,550', '21,600'],
+            ['245/45R19', '245/45R19 102W EXTRA LOAD TL PRIMACY 4 ST MI', 'PRIMACY 4 ST', '19', '20,150', '21,200'],
+            ['245/40R19', '245/40R19 98Y XL TL PRIMACY 3 ZP*MOE GRNX MI', 'PRIMACY 3', '19', '33,850', '35,550'],
+            ['245/40R19', '245/40R19 98Y EXTRA LOAD TL PRIMACY 3* MO GRNX MI', 'PRIMACY 3', '19', '24,450', '25,700'],
+            ['235/55R19', '235/55R19 105YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '19', '21,750', '22,850'],
+            ['225/55R19', '225/55R19 99V TL PRIMACY SUV+ MI', 'PRIMACY SUV+', '19', '15,550', '16,350'],
+            ['285/60R18', '285/60R18 116T TL LTX TRAIL ST MI', 'LTX TRAIL ST', '18', '22,000', '23,100'],
+            ['285/60R18', '285/60R18 116V TL PRIMACY SUV+ MI', 'PRIMACY SUV+', '18', '20,450', '21,500'],
+            ['285/35ZR18', '285/35ZR18 (101Y) XL TL PILOT SUPER SPORT MO1 MI', 'PILOT SUPER SPORT', '18', '31,800', '33,400'],
+            ['275/40R18', '275/40R18 99Y TL PRIMACY 3 ZP MOE GRNX MI', 'PRIMACY 3', '18', '30,550', '32,100'],
+            ['265/60R18', '265/60R18 110H TL PRIMACY SUV+ MI', 'PRIMACY SUV+', '18', '19,550', '20,550'],
+            ['265/60R18', '265/60R18 110T TL LTX TRAIL ST MI', 'LTX TRAIL ST', '18', '19,250', '20,250'],
+            ['255/55R18', '255/55R18 109V XL TL LATITUDE SPORT 3 ZP GRNX MI', 'LATITUDE SPORT 3', '18', '30,500', '32,050'],
+            ['255/55R18', '255/55R18 109YXL PILOT SPORT 4 SUV', 'PILOT SPORT 4 SUV', '18', '20,950', '22,000'],
+            ['255/40R18', '255/40ZR18 (99Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '18', '18,000', '18,900'],
+            ['245/50R18', '245/50R18 100W PRIMACY 4 ST', 'PRIMACY 4 ST', '18', '21,000', '22,050'],
+            ['245/50R18', '245/50R18 100Y TL PRIMACY 3 ZP GRNX MI', 'PRIMACY 3', '18', '24,800', '26,050'],
+            ['245/45R18', '245/45R18 100YXL PRIMACY 3 MOE ZP', 'PRIMACY 3', '18', '22,250', '23,400'],
+            ['245/45R18', '245/45R18 100W EXTRA LOAD TL PRIMACY 4 ST MI', 'PRIMACY 4 ST', '18', '15,650', '16,450'],
+            ['245/40R18', '245/40R18 97Y EXTRA LOAD TL PRIMACY 3 ZP MOE GRNX MI', 'PRIMACY 3', '18', '24,200', '25,450'],
+            ['245/40R18', '245/40ZR18 (97Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '18', '18,600', '19,550'],
+            ['235/60R18', '235/60R18 103V PRIMACY SUV+', 'PRIMACY SUV+', '18', '16,350', '17,200'],
+            ['235/60R18', '235/60R18 107W XL TL PILOT SPORT 4 SUV MI', 'PILOT SPORT 4 SUV', '18', '19,500', '20,500'],
+            ['235/55R18', '235/55R18 104VXL LATITUDE SPORT 3 VOL', 'LATITUDE SPORT 3', '18', '21,900', '23,000'],
+            ['235/50R18', '235/50R18 97W TL PRIMACY 4 ST MI', 'PRIMACY 4 ST', '18', '19,950', '20,950'],
+            ['235/45R18', '235/45ZR18 (98Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '18', '18,050', '19,000'],
+            ['225/55R18', '225/55R18 102Y XL TL PRIMACY 4 AO1 MI', 'PRIMACY 4', '18', '20,100', '21,150'],
+            ['225/50R18', '225/50ZR18 (99Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '18', '16,650', '17,500'],
+            ['225/45R18', '225/45R18 95Y EXTRA LOAD TL PRIMACY 3 ZP MOE GRNX MI', 'PRIMACY 3', '18', '23,050', '24,250'],
+            ['225/45R18', '225/45ZR18 (95Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '18', '17,550', '18,450'],
+            ['215/55R18', '215/55R18 99V XL TL PRIMACY 4 VOL MI', 'PRIMACY 4 ST', '18', '14,950', '15,700'],
+            ['265/65R17', '265/65R17 112H TL PRIMACY SUV+ MI', 'PRIMACY SUV+', '17', '16,300', '17,150'],
+            ['265/65R17', '265/65R17 112T TL LTX TRAIL ST MI', 'LTX TRAIL ST', '17', '16,250', '17,100'],
+            ['245/65R17', '245/65R17 107H TL PRIMACY SUV+ MI', 'PRIMACY SUV+', '17', '15,850', '16,650'],
+            ['245/45R17', '245/45R17 99WXL PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '14,300', '15,050'],
+            ['235/65R17', '235/65R17 108T XL TL LTX TRAIL ST MI', 'LTX TRAIL ST', '17', '14,800', '15,550'],
+            ['235/65R17', '235/65R17 108V EXTRA LOAD TL PRIMACY SUV+ MI', 'PRIMACY SUV+', '17', '14,650', '15,400'],
+            ['235/55R17', '235/55R17 103WXL PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '15,450', '16,250'],
+            ['225/65R17', '225/65R17 106H XL TL PRIMACY SUV+ M', 'PRIMACY SUV+', '17', '11,350', '11,950'],
+            ['225/55R17', '225/55R17 97Y TL PRIMACY 3 ZP MOE GRNX MI', 'PRIMACY 3', '17', '21,250', '22,350'],
+            ['225/55R17', '225/55R17 101WXL PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '13,350', '14,050'],
+            ['225/50ZR17', '225/50ZR17 (98Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '17', '13,700', '14,400'],
+            ['225/45ZR17', '225/45ZR17 (94Y) XL TL PILOT SPORT 5 MI', 'PILOT SPORT 5', '17', '13,150', '13,850'],
+            ['215/60R17', '215/60R17 96V PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '11,850', '12,450'],
+            ['215/55R17', '215/55R17 94V PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '13,600', '14,300'],
+            ['215/50R17', '215/50R17 95WXL PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '13,500', '14,200'],
+            ['215/45R17', '215/45R17 91WXL PRIMACY 4 ST', 'PRIMACY 4 ST', '17', '10,750', '11,300'],
+            ['225/55R16', '225/55R16 99W EXTRA LOAD TL PRIMACY 4 ST MI', 'PRIMACY 4 ST', '16', '11,450', '11,900'],
+            ['215/60R16', '215/60R16 99VXL PRIMACY 4 ST', 'PRIMACY 4 ST', '16', '9,800', '10,150'],
+            ['205/65R16', '205/65R16 95V PRIMACY 4 ST', 'PRIMACY 4 ST', '16', '8,650', '9,000'],
+            ['205/65R16', '205/65R16 95H TL ENERGY XM2 + MI', 'ENERGY XM2+', '16', '8,400', '8,700'],
+            ['205/60R16', '205/60R16 92V PRIMACY 4 ST', 'PRIMACY 4 ST', '16', '9,100', '9,450'],
+            ['205/55R16', '205/55R16 91W TL PRIMACY 3 ZP GRNX MI', 'PRIMACY 3', '16', '12,650', '13,100'],
+            ['205/55ZR16', '205/55ZR16 94WXL PILOT SPORT 4 ST', 'PILOT SPORT 4 ST', '16', '11,350', '11,750'],
+            ['205/55R16', '205/55R16 91W TL PRIMACY 4 ST MI', 'PRIMACY 4 ST', '16', '10,900', '11,300'],
+            ['195/55R16', '195/55R16 91VXL PRIMACY 4 ST', 'PRIMACY 4 ST', '16', '9,550', '9,900'],
+            ['185/65R15', '185/65R15 88H TL ENERGY XM2 + MI', 'ENERGY XM2+', '15', '8,100', '8,400']
+        ];
 
-    <table class="w-full text-sm text-gray-700 divide-y divide-gray-300" >
-         
-        <thead class="text-xs uppercase text-white">
-            <tr>
-                <th>Size</th>
-                <th>Product Description</th>
-                <th>Pattern</th>
-                <th>Rim Size</th>
-                <th>RCP (in INR)</th>
-                <th>MRP (in INR)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>285/45R22</td><td>285/45R22 114YXL PS4 SUVRG</td><td>PILOT SPORT 4 SUV</td><td>22</td><td>45,700</td><td>48,000</td></tr>
-            <tr><td>315/40R21</td><td>315/40R21 111Y TL LATITUDE SPORT 3 MO GRNX MI</td><td>LATITUDE SPORT 3</td><td>21</td><td>42,550</td><td>44,700</td></tr>
-            <tr><td>315/35R21</td><td>315/35R21 111Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>37,750</td><td>39,650</td></tr>
-            <tr><td>295/35R21</td><td>295/35R21 107Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>40,050</td><td>42,100</td></tr>
-            <tr><td>285/45R21</td><td>285/45ZR21 (113Y) XL TL PILOT SPORT 4 SUV NCO MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>41,450</td><td>43,550</td></tr>
-            <tr><td>285/45R21</td><td>285/45R21 113Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>40,950</td><td>43,000</td></tr>
-            <tr><td>285/40R21</td><td>285/40R21 109Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>37,350</td><td>39,250</td></tr>
-            <tr><td>275/50R21</td><td>275/50R21 113V XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>38,000</td><td>39,900</td></tr>
-            <tr><td>275/45R21</td><td>275/45R21 107Y TL LATITUDE SPORT 3 MO GRNX MI</td><td>LATITUDE SPORT 3</td><td>21</td><td>37,200</td><td>39,100</td></tr>
-            <tr><td>275/40R21</td><td>275/40R21 107Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>21</td><td>35,450</td><td>37,250</td></tr>
-            <tr><td>305/40R20</td><td>305/40R20 112Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>32,750</td><td>34,400</td></tr>
-            <tr><td>295/40R20</td><td>295/40R20 110Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>30,900</td><td>32,450</td></tr>
-            <tr><td>295/30ZR20</td><td>295/30ZR20 (101Y) XL TL PILOT SPORT 4S MO1 MI</td><td>PILOT SPORT 4S</td><td>20</td><td>34,900</td><td>36,650</td></tr>
-            <tr><td>285/50R20</td><td>285/50R20 116W XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>27,500</td><td>28,900</td></tr>
-            <tr><td>275/50ZR20</td><td>275/50ZR20 113YXL PILOT SPORT 4 SUV MO1</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>31,100</td><td>32,700</td></tr>
-            <tr><td>275/45R20</td><td>275/45R20 110YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>28,150</td><td>29,600</td></tr>
-            <tr><td>275/45R20</td><td>275/45R20 110V XL PILOT SPORT 4 SUV VOL MI</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>25,100</td><td>26,400</td></tr>
-            <tr><td>275/35ZR20</td><td>275/35ZR20 102Y XL TL PILOT SPORT 4 ZP MI</td><td>PILOT SPORT 4</td><td>20</td><td>33,050</td><td>34,750</td></tr>
-            <tr><td>255/55R20</td><td>255/55R20 110YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>30,250</td><td>31,800</td></tr>
-            <tr><td>255/50R20</td><td>255/50R20 109YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>20</td><td>27,200</td><td>28,600</td></tr>
-            <tr><td>255/45R20</td><td>255/45R20 105W XL PILOT SPORT EV ACOUSTIC GOE MI</td><td>PILOT SPORT EV</td><td>20</td><td>27,700</td><td>29,100</td></tr>
-            <tr><td>245/45R20</td><td>245/45R20 103Y XL TL PILOT SPORT 4 NFO MI</td><td>PILOT SPORT 4</td><td>20</td><td>28,200</td><td>29,650</td></tr>
-            <tr><td>245/40ZR20</td><td>245/40ZR20 99Y XL TL PILOT SPORT 4 ZP MI</td><td>PILOT SPORT 4</td><td>20</td><td>30,900</td><td>32,450</td></tr>
-            <tr><td>285/45R19</td><td>285/45R19 111W XL TL LATITUDE SPORT 3 ZP GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>34,200</td><td>35,950</td></tr>
-            <tr><td>275/55R19</td><td>275/55R19 111W LATITUDE SPORT MO</td><td>LATITUDE SPORT</td><td>19</td><td>28,900</td><td>30,350</td></tr>
-            <tr><td>275/40R19</td><td>275/40R19 101Y TL PRIMACY 3 ZP S1 GRNX MI</td><td>PRIMACY 3</td><td>19</td><td>34,750</td><td>36,500</td></tr>
-            <tr><td>265/50R19</td><td>265/50R19 110YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>27,750</td><td>29,150</td></tr>
-            <tr><td>255/55R19</td><td>255/55R19 111YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>24,100</td><td>25,350</td></tr>
-            <tr><td>255/50R19</td><td>255/50R19 107W XL TL LATITUDE SPORT 3 ZP GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>33,200</td><td>34,900</td></tr>
-            <tr><td>255/50R19</td><td>255/50R19 103Y TL LATITUDE SPORT 3 NO GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>26,850</td><td>28,200</td></tr>
-            <tr><td>255/50R19</td><td>255/50R19 103Y LATITUDE SPORT3 MO1</td><td>LATITUDE SPORT 3</td><td>19</td><td>25,550</td><td>26,850</td></tr>
-            <tr><td>255/50R19</td><td>255/50R19 107Y XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>23,300</td><td>24,500</td></tr>
-            <tr><td>245/50R19</td><td>245/50R19 105W XL TL LATITUDE SPORT 3 ZP* GRNX MI</td><td>LATITUDE SPORT 3</td><td>19</td><td>32,050</td><td>33,700</td></tr>
-            <tr><td>245/45R19</td><td>245/45R19 98Y PRIMACY 3 S1 ZP</td><td>PRIMACY 3</td><td>19</td><td>31,050</td><td>32,650</td></tr>
-            <tr><td>245/45R19</td><td>245/45ZR19 (102Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>19</td><td>20,550</td><td>21,600</td></tr>
-            <tr><td>245/45R19</td><td>245/45R19 102W EXTRA LOAD TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>19</td><td>20,150</td><td>21,200</td></tr>
-            <tr><td>245/40R19</td><td>245/40R19 98Y XL TL PRIMACY 3 ZP*MOE GRNX MI</td><td>PRIMACY 3</td><td>19</td><td>33,850</td><td>35,550</td></tr>
-            <tr><td>245/40R19</td><td>245/40R19 98Y EXTRA LOAD TL PRIMACY 3* MO GRNX MI</td><td>PRIMACY 3</td><td>19</td><td>24,450</td><td>25,700</td></tr>
-            <tr><td>235/55R19</td><td>235/55R19 105YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>19</td><td>21,750</td><td>22,850</td></tr>
-            <tr><td>225/55R19</td><td>225/55R19 99V TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>19</td><td>15,550</td><td>16,350</td></tr>
-            <tr><td>285/60R18</td><td>285/60R18 116T TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>18</td><td>22,000</td><td>23,100</td></tr>
-            <tr><td>285/60R18</td><td>285/60R18 116V TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>18</td><td>20,450</td><td>21,500</td></tr>
-            <tr><td>285/35ZR18</td><td>285/35ZR18 (101Y) XL TL PILOT SUPER SPORT MO1 MI</td><td>PILOT SUPER SPORT</td><td>18</td><td>31,800</td><td>33,400</td></tr>
-            <tr><td>275/40R18</td><td>275/40R18 99Y TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>30,550</td><td>32,100</td></tr>
-            <tr><td>265/60R18</td><td>265/60R18 110H TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>18</td><td>19,550</td><td>20,550</td></tr>
-            <tr><td>265/60R18</td><td>265/60R18 110T TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>18</td><td>19,250</td><td>20,250</td></tr>
-            <tr><td>255/55R18</td><td>255/55R18 109V XL TL LATITUDE SPORT 3 ZP GRNX MI</td><td>LATITUDE SPORT 3</td><td>18</td><td>30,500</td><td>32,050</td></tr>
-            <tr><td>255/55R18</td><td>255/55R18 109YXL PILOT SPORT 4 SUV</td><td>PILOT SPORT 4 SUV</td><td>18</td><td>20,950</td><td>22,000</td></tr>
-            <tr><td>255/40R18</td><td>255/40ZR18 (99Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>18,000</td><td>18,900</td></tr>
-            <tr><td>245/50R18</td><td>245/50R18 100W PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>18</td><td>21,000</td><td>22,050</td></tr>
-            <tr><td>245/50R18</td><td>245/50R18 100Y TL PRIMACY 3 ZP GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>24,800</td><td>26,050</td></tr>
-            <tr><td>245/45R18</td><td>245/45R18 100YXL PRIMACY 3 MOE ZP</td><td>PRIMACY 3</td><td>18</td><td>22,250</td><td>23,400</td></tr>
-            <tr><td>245/45R18</td><td>245/45R18 100W EXTRA LOAD TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>18</td><td>15,650</td><td>16,450</td></tr>
-            <tr><td>245/40R18</td><td>245/40R18 97Y EXTRA LOAD TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>24,200</td><td>25,450</td></tr>
-            <tr><td>245/40R18</td><td>245/40ZR18 (97Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>18,600</td><td>19,550</td></tr>
-            <tr><td>235/60R18</td><td>235/60R18 103V PRIMACY SUV+</td><td>PRIMACY SUV+</td><td>18</td><td>16,350</td><td>17,200</td></tr>
-            <tr><td>235/60R18</td><td>235/60R18 107W XL TL PILOT SPORT 4 SUV MI</td><td>PILOT SPORT 4 SUV</td><td>18</td><td>19,500</td><td>20,500</td></tr>
-            <tr><td>235/55R18</td><td>235/55R18 104VXL LATITUDE SPORT 3 VOL</td><td>LATITUDE SPORT 3</td><td>18</td><td>21,900</td><td>23,000</td></tr>
-            <tr><td>235/50R18</td><td>235/50R18 97W TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>18</td><td>19,950</td><td>20,950</td></tr>
-            <tr><td>235/45R18</td><td>235/45ZR18 (98Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>18,050</td><td>19,000</td></tr>
-            <tr><td>225/55R18</td><td>225/55R18 102Y XL TL PRIMACY 4 AO1 MI</td><td>PRIMACY 4</td><td>18</td><td>20,100</td><td>21,150</td></tr>
-            <tr><td>225/50R18</td><td>225/50ZR18 (99Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>16,650</td><td>17,500</td></tr>
-            <tr><td>225/45R18</td><td>225/45R18 95Y EXTRA LOAD TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>18</td><td>23,050</td><td>24,250</td></tr>
-            <tr><td>225/45R18</td><td>225/45ZR18 (95Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>18</td><td>17,550</td><td>18,450</td></tr>
-            <tr><td>215/55R18</td><td>215/55R18 99V XL TL PRIMACY 4 VOL MI</td><td>PRIMACY 4 ST</td><td>18</td><td>14,950</td><td>15,700</td></tr>
-            <tr><td>265/65R17</td><td>265/65R17 112H TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>17</td><td>16,300</td><td>17,150</td></tr>
-            <tr><td>265/65R17</td><td>265/65R17 112T TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>17</td><td>16,250</td><td>17,100</td></tr>
-            <tr><td>245/65R17</td><td>245/65R17 107H TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>17</td><td>15,850</td><td>16,650</td></tr>
-            <tr><td>245/45R17</td><td>245/45R17 99WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>14,300</td><td>15,050</td></tr>
-            <tr><td>235/65R17</td><td>235/65R17 108T XL TL LTX TRAIL ST MI</td><td>LTX TRAIL ST</td><td>17</td><td>14,800</td><td>15,550</td></tr>
-            <tr><td>235/65R17</td><td>235/65R17 108V EXTRA LOAD TL PRIMACY SUV+ MI</td><td>PRIMACY SUV+</td><td>17</td><td>14,650</td><td>15,400</td></tr>
-            <tr><td>235/55R17</td><td>235/55R17 103WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>15,450</td><td>16,250</td></tr>
-            <tr><td>225/65R17</td><td>225/65R17 106H XL TL PRIMACY SUV+ M</td><td>PRIMACY SUV+</td><td>17</td><td>11,350</td><td>11,950</td></tr>
-            <tr><td>225/55R17</td><td>225/55R17 97Y TL PRIMACY 3 ZP MOE GRNX MI</td><td>PRIMACY 3</td><td>17</td><td>21,250</td><td>22,350</td></tr>
-            <tr><td>225/55R17</td><td>225/55R17 101WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>13,350</td><td>14,050</td></tr>
-            <tr><td>225/50ZR17</td><td>225/50ZR17 (98Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>17</td><td>13,700</td><td>14,400</td></tr>
-            <tr><td>225/45ZR17</td><td>225/45ZR17 (94Y) XL TL PILOT SPORT 5 MI</td><td>PILOT SPORT 5</td><td>17</td><td>13,150</td><td>13,850</td></tr>
-            <tr><td>215/60R17</td><td>215/60R17 96V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>11,850</td><td>12,450</td></tr>
-            <tr><td>215/55R17</td><td>215/55R17 94V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>13,600</td><td>14,300</td></tr>
-            <tr><td>215/50R17</td><td>215/50R17 95WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>13,500</td><td>14,200</td></tr>
-            <tr><td>215/45R17</td><td>215/45R17 91WXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>17</td><td>10,750</td><td>11,300</td></tr>
-            <tr><td>225/55R16</td><td>225/55R16 99W EXTRA LOAD TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>16</td><td>11,450</td><td>11,900</td></tr>
-            <tr><td>215/60R16</td><td>215/60R16 99VXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>9,800</td><td>10,150</td></tr>
-            <tr><td>205/65R16</td><td>205/65R16 95V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>8,650</td><td>9,000</td></tr>
-            <tr><td>205/65R16</td><td>205/65R16 95H TL ENERGY XM2 + MI</td><td>ENERGY XM2+</td><td>16</td><td>8,400</td><td>8,700</td></tr>
-            <tr><td>205/60R16</td><td>205/60R16 92V PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>9,100</td><td>9,450</td></tr>
-            <tr><td>205/55R16</td><td>205/55R16 91W TL PRIMACY 3 ZP GRNX MI</td><td>PRIMACY 3</td><td>16</td><td>12,650</td><td>13,100</td></tr>
-            <tr><td>205/55ZR16</td><td>205/55ZR16 94WXL PILOT SPORT 4 ST</td><td>PILOT SPORT 4 ST</td><td>16</td><td>11,350</td><td>11,750</td></tr>
-            <tr><td>205/55R16</td><td>205/55R16 91W TL PRIMACY 4 ST MI</td><td>PRIMACY 4 ST</td><td>16</td><td>10,900</td><td>11,300</td></tr>
-            <tr><td>195/55R16</td><td>195/55R16 91VXL PRIMACY 4 ST</td><td>PRIMACY 4 ST</td><td>16</td><td>9,550</td><td>9,900</td></tr>
-            <tr><td>185/65R15</td><td>185/65R15 88H TL ENERGY XM2 + MI</td><td>ENERGY XM2+</td><td>15</td><td>8,100</td><td>8,400</td></tr>
-        </tbody>
-    </table>
-</div>
+        const michelinHeaders = ['Size', 'Product Description', 'Pattern', 'Rim Size', 'RCP (in INR)', 'MRP (in INR)'];
+
+        function createTable(title, data, headers) {
+            // Only one category for this page, so we make the title more prominent
+            let tableHTML = `
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                    <h2 class="text-2xl font-bold p-4 bg-continental-blue text-white rounded-t-xl hidden">${title}</h2>
+                    <div class="table-container p-4">
+                        <table class="w-full text-sm text-left text-gray-700 mobile-table">
+                            <thead class="text-xs text-white uppercase bg-continental-blue shadow-md">
+                                <tr>
+                                    ${headers.map(header => `<th scope="col" class="py-3 px-3">${header}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map((row, index) => `
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
+                                        ${row.map((cellData, colIndex) => `
+                                            <td data-label="${headers[colIndex]}" class="py-3 px-3 ${colIndex === 4 || colIndex === 5 ? 'text-right font-extrabold text-lg' : ''} ${colIndex === 0 ? 'font-medium text-gray-900' : ''}">
+                                                ${cellData}
+                                            </td>
+                                        `).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            return tableHTML;
+        }
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                console.warn("Cannot go back: This is the first page in history.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('app-container');
+            const titleElement = document.querySelector('h1.text-continental-blue');
+
+            if (container) {
+                // Generate the main Michelin Table
+                container.innerHTML = createTable('Michelin Passenger Car Tyres', michelinData, michelinHeaders);
+            }
+            
+            // Adjust the main title font size/style for better appearance on the specific page layout
+            if (titleElement) {
+                titleElement.classList.remove('text-3xl', 'sm:text-4xl');
+                titleElement.classList.add('text-4xl', 'sm:text-5xl', 'text-center');
+            }
+        });
+    </script>
 </body>
 </html>

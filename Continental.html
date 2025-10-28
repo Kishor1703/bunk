@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,8 @@
     <style>
         /* Custom styles for better table visibility and fixed header on large screens */
         .table-container {
-            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            max-height: 80vh;
+            /* Limits table height for scrollability on large displays */
             overflow-y: auto;
             padding-top: 10px;
         }
@@ -36,7 +38,8 @@
                 position: sticky;
                 top: 0;
                 z-index: 10;
-                background-color: #002B5F; /* continental-blue */
+                background-color: #002B5F;
+                /* continental-blue */
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
         }
@@ -53,7 +56,8 @@
             }
 
             .mobile-table thead {
-                display: none; /* Hide standard headers on mobile */
+                display: none;
+                /* Hide standard headers on mobile */
             }
 
             .mobile-table td {
@@ -75,28 +79,33 @@
                 font-weight: 600;
                 color: #4b5563;
             }
+
             .mobile-table td:last-child {
                 border-bottom: 0;
             }
         }
     </style>
 </head>
+
 <body class="bg-gray-50 font-sans text-gray-800 p-4 sm:p-8">
-<div class="fixed bottom-8 right-8 z-50">
-            <button onclick="goBack()" class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
-                <!-- SVG Icon for the Back Arrow -->
-                <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-                <span>Back</span>
-            </button>
-        </div>
+    <div class="fixed bottom-8 right-8 z-50">
+        <button onclick="goBack()"
+            class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
+            <!-- SVG Icon for the Back Arrow -->
+            <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+    </div>
     <!-- Firebase Initialization (Required for the environment, even if not used for data) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
+
         // Define global variables from the canvas environment
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
@@ -124,8 +133,8 @@
         }
         initFirebase();
     </script>
-    
-   
+
+
 
     <div class="max-w-7xl mx-auto">
         <div class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
@@ -133,12 +142,13 @@
         </div>
 
         <main id="app-container" class="space-y-12">
-            
+
         </main>
-        
+
         <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
             <p>Prices are Valid for Tubeless Tyres Only.</p>
-            <p>Prices are liable to change without notice and those prevailing at the time of invoicing/dispatch will be applicable.</p>
+            <p>Prices are liable to change without notice and those prevailing at the time of invoicing/dispatch will be
+                applicable.</p>
             <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
                 <span class="font-semibold">Key:</span>
                 LI/SI: Load Index/Speed | FR: Flange Rib | XL: Extra load
@@ -223,7 +233,7 @@
             `;
             return tableHTML;
         }
-function goBack() {
+        function goBack() {
             // Check if there is history to navigate back to (length > 1 means a previous page exists)
             if (window.history.length > 1) {
                 window.history.back();
@@ -246,4 +256,5 @@ function goBack() {
         });
     </script>
 </body>
+
 </html>

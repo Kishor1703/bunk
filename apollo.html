@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apollo Recommended Customer Price List - TBB/TBR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'continental-blue': '#002B5F',
+                        'apollo-dark': '#001f3f', // Dark Red/Maroon
+                        'apollo-highlight': '#E5E7EB', // Light Gray for stripe
+                        'apollo-text': '#1F2937', // Dark Gray for text
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for better table visibility and fixed header on large screens */
+        .table-container {
+            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            overflow-y: auto;
+            padding-top: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .table-container thead th {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background-color: #001f3f; /* apollo-dark */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* Mobile-first: Making the table responsive by using data attributes */
+        @media (max-width: 767px) {
+            .mobile-table tr {
+                display: block;
+                margin-bottom: 1.5rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-table thead {
+                display: none; /* Hide standard headers on mobile */
+            }
+
+            .mobile-table td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border-bottom: 1px solid #f3f4f6;
+            }
+
+            .mobile-table td:before {
+                /* The content attribute retrieves the header text from the data-label attribute */
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: #4b5563;
+            }
+            .mobile-table td:last-child {
+                border-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-apollo-text p-4 sm:p-8">
+
+     <div class="fixed bottom-8 right-8 z-50">
+        <button onclick="goBack()"
+            class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
+            <!-- SVG Icon for the Back Arrow -->
+            <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+    </div>
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-apollo-dark">Apollo Recommended Customer Price List</h1>
+            <p class="text-lg text-gray-600 mt-2">Complete List (Effective from 22nd September 2025) </p>
+        </div>
+
+        <main id="app-container" class="space-y-12">
+            </main>
+
+        <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p>*Apollo Recommended Price includes price of Tube and Flap for Kit SKUs (TTF) inclusive of all taxes. </p>
+            <p class="mt-1">All prices are **Recommended Prices [Inclusive of 18% GST]** effective from 22nd Sept 2025. </p>
+            <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
+                <span class="font-semibold">Type/Construction Key:</span>
+                TTF: Tube Type with Tube and Flap Kit | TL: Tubeless | Tube: Only Tube Price
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Data extracted and structured from the Apollo PDF.
+        // Columns: ['Type/Construction', 'Size', 'Fitment', 'Material Description', 'Recommended Customer Price (RCP) [INR]']
+        const apolloData = [
+            // TBB (Page 1)
+            ['TTF', '10.00-20', 'Drive', '10.00-20 18PR LOADSTAR SUPER XP-D', '20440'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 16PR XT7 GOLD HD-D', '18840'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 16PR XT7(N)-D', '18670'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 18PR KAIZEN 50L-D', '18580'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 16PR XT9 GOLD-D.', '18190'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 16PR 146/142J XT 100 HD X-D', '18250'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 16PR KAIZEN XDT-D', '18060'],
+            ['TTF', '10.00-20', 'Drive', '10.00-20 16PR 146/142J HAULUG X-D', '17620'],
+            ['TTF', '10.00-20', 'Steer', '10.00-20 18PR AMAR DELUXE-D', '17530'],
+            ['TTF', '10.00-20', 'Steer', '10.00-20 16PR AMAR GOLD-D', '17100'],
+            ['TTF', '10.00-20', 'Steer', '10.00-20 16PR 146/142J AMAR DELUXE X-D', '16490'],
+            ['TTF', '10.00-20', 'Steer', '10.00-20 16PR AXVT (NEW) - D', '16480'],
+            ['TTF', '10.00-20', 'All Wheel', '10.00-20 18PR 147/143G SL HD -D', '19850'],
+            ['TTF', '10.00-20', 'All Wheel', '10.00-20 18PR 144 G MINE LUG - D', '20950'],
+            ['TTF', '10.00-20', 'All Wheel', '10.00-20 18PR 144G TERRA BT-D', '20320'],
+            ['TTF', '10.00-20', 'All Wheel', '10.00-20 16PR SL HD -D', '18710'],
+            ['TTF', '295/95 D20', 'Drive', '295/95 D20 152/148J XT-100 HD-D', '18820'],
+            ['TTF', '295/95 D20', 'Drive', '295/95 D20 152/148J XT7-D', '18670'],
+            ['TTF', '295/95 D20', 'Drive', '295/95 D20 152/148J XT9 GOLD - D', '18190'],
+            ['TTF', '295/95 D20', 'Steer', '295/95 D20 152/148J ABHIMANYU-D', '17670'],
+            ['TTF', '295/95 D20', 'Steer', '295/95 D20 152/148J AMAR GOLD-D', '17100'],
+            ['TTF', '295/95 D20', 'Steer', '295/95 D20 152/148J AXVT - D', '16480'],
+            ['TTF', '11.00-20', 'Drive', '11.00-20 18PR XT7-D', '21630'],
+            ['TTF', '11.00-20', 'Drive', '11.00-20 16PR XT7-D', '21290'],
+            ['TTF', '11.00-20', 'Steer', '11.00-20 16PR AMAR DELUXE-D', '20060'],
+            ['TTF', '11.00-20', 'Steer', '11.00-20 18PR 152/147J ABHIMANYU-D', '19880'],
+            ['TTF', '11.00-20', 'All Wheel', '11.00-20 18PR 146G MINE LUGS-D', '24170'],
+            ['TTF', '11.00-20', 'All Wheel', '11.00-20 18PR 146 G MINE LUG - D', '24140'],
+            ['TTF', '11.00-20', 'All Wheel', '11.00-20 18PR 146G TERRA BT-D', '23050'],
+            ['TTF', '11.00-20', 'All Wheel', '11.00-20 18PR AMAR DELUXE-D', '19490'],
+
+            // TBB (Page 2)
+            ['TTF', '9.00-20', 'Drive', '9.00-20 16PR 142/137J XT7 GOLD HD-D', '15670'],
+            ['TTF', '9.00-20', 'Drive', '9.00-20 16PR XT7-D', '15560'],
+            ['TTF', '9.00-20', 'Steer', '9.00-20 16PR AMAR GOLD-D', '14780'],
+            ['TTF', '9.00-20', 'Steer', '9.00-20 16PR 142/137J ABHIMANYU - D', '14910'],
+            ['TTF', '9.00-20', 'All Wheel', '9.00-20 16PR MINE LUG NEW-D', '19170'],
+            ['TTF', '8.25-20', 'Drive', '8.25-20 16PR LOADSTAR SUPER GOLDD-', '15120'],
+            ['TTF', '8.25-20', 'Drive', '8.25-20 16PR 137/132J XT7 GOLD HD -D', '14710'],
+            ['TTF', '8.25-20', 'Drive', '8.25-20 16PR XT7-D', '14520'],
+            ['TTF', '8.25-20', 'Steer', '8.25-20 16PR AMAR GOLD-D', '12340'],
+            ['TTF', '8.25-20', 'Steer', '8.25-20 16PR 137/132K ABHIMANYU - D', '12370'],
+            ['TTF', '12.00-20', 'All Wheel', '12.00-20 20PR 151F TERRA MT-D', '25010'],
+            ['TTF', '12.00-20', 'All Wheel', '12.00-20 18PR BULLET-D', '26740'],
+            ['TTF', '12.00-24', 'All Wheel', '12.00-24 20PR 155F TERRA MT-D', '29230'],
+            ['TTF', '14.00-20', 'All Wheel', '14.00-20 22PR 162G BULLET - D', '41750'],
+            ['TL', '14.00-20', 'All Wheel', '14.00-20 22PR BULLET TL-D', '37950'],
+            ['TL', '14.00-20', 'All Wheel', '14.00-20 18PR 156G BULLET TL-D', '37940'],
+            ['TTF', '15.00-21', 'All Wheel', '15.00-21 16PR BULLET-D', '49150'],
+            ['TTF', '15.00-21', 'All Wheel', '15.00-21 12PR BULLET-D', '49090'],
+            ['TTF', '355/90-20', 'All Wheel', '355/90-20 18PR HUNTERD-', '22610'],
+            ['TTF', '355/90-20', 'All Wheel', '355/90-20 18PR BULLET-D', '22510'],
+            ['Tube', '10.00-20', 'Tube', '10.00-20 TUBESTAR PKD -D', '1810'],
+            ['Tube', '9.00-20', 'Tube', '9.00-20 TUBE PKD -D', '1120'],
+            ['Tube', '8.25-20', 'Tube', '8.25-20 TUBE PKD -D', '960'],
+
+            // TBR (Page 3)
+            ['TTF', '295/90 R20', 'Drive', '295/90 R20 152/148J ENDURACE RD HD-D', '24870'],
+            ['TTF', '295/90 R20', 'Drive', '295/90 R20 152/148J ENDURACE LD-D', '24630'],
+            ['TTF', '295/90 R20', 'Drive', '295/90 R20 152/148J ENDUTRAX MD+-D', '24490'],
+            ['TTF', '295/90 R20', 'Drive', '295/90 R20 152/148J ENDUMILE LHD-D', '24260'],
+            ['TTF', '295/90 R20', 'Drive', '295/90 R20 152/148K ENDURACE RD NRG-D', '23260'],
+            ['TTF', '295/90 R20', 'Drive', '295/90 R20 152/148J ENDURACE ED-D', '23040'],
+            ['TTF', '295/90 R20', 'Steer', '295/90 R20 152/148J ENDURACE MA-D', '23110'],
+            ['TTF', '295/90 R20', 'Steer', '295/90 R20 152/148K ENDURACE RA-D', '22930'],
+            ['TTF', '295/90 R20', 'Steer', '295/90 R20 152/148K ENDURACE RA NRG-D', '22680'],
+            ['TTF', '295/90 R20', 'Steer', '295/90 R20 152/148J ENDUTRAX MA-D', '22640'],
+            ['TTF', '295/90 R20', 'All Wheel', '295/90 R20 152/148K ENDURACE RA(T) - D', '23240'],
+            ['TTF', '295/90 R20', 'All Wheel', '295/90 R20 152/148K ENDURACE RA(T) NRG-D', '23170'],
+            ['TTF', '10.00 R20', 'Drive', '10.00 R20 16PR 146/143K ENDUTUFF SOD-D', '25170'],
+            ['TTF', '10.00 R20', 'Drive', '10.00 R20 16PR 146/143K ENDURACE MD(P)-D', '23560'],
+            ['TTF', '10.00R20', 'Steer', '10.00R20 146/143K 16PR ENDURACE MA-D', '23110'],
+            ['TTF', '11.00 R 20', 'Drive', '11.00 R20 16PR 150/147K ENDURACE LDR-D', '26620'],
+            ['TTF', '11.00 R 20', 'Steer', '11.00 R20 16PR 150/147K ENDURACE RA1-D', '24500'],
+            ['TTF', '11.00 R20', 'Drive', '11.00 R20 16PR 150/147K ENDUTRAX MD-D.', '26370'],
+            ['TTF', '11.00 R20', 'Steer', '11.00 R20 16PR 150/147K ENDUTRAX MA-D', '25070'],
+            ['TTF', '11.00 R20', 'All Wheel', '11.00 R20 16PR 150/147K ENDURACERA -D', '25580'],
+            ['TTF', '11.00R20', 'All Wheel', '11.00R20 16PR 150/147F ENDUTUFF MINING-D', '28880'],
+            ['TTF', '9.00 R20', 'Drive', '9.00 R20 16PR 142/140K ENDURACE LD+- D', '19680'],
+            ['TTF', '9.00 R20', 'Steer', '9.00 R20 16PR 142/140K ENDURACE RA-D', '18660'],
+            ['TTF', '9.00 R20', 'All Wheel', '9.00 R20 16PR 142/140K ENDURACE RAT-D', '19270'],
+            ['TTF', '8.25 R20', 'Drive', '8.25 R20 16PR 137/135K ENDURACE LD -D', '17600'],
+            ['TTF', '8.25 R20', 'Steer', '8.25 R20 137/135K 16PR ENDURACERA -D', '16770'],
+            ['TTF', '8.25 R20', 'All Wheel', '8.25 R20 16PR 137/135K ENDURACE RAT-D', '17000'],
+            ['TTF', '12.00 R20', 'Drive', '12.00 R20 18PR154/151K ENDUTUFF SOD-II-D', '31330'],
+
+            // TBR (Page 4)
+            ['TTF', '12.00 R20', 'Steer', '12.00 R20 154/151K ENDUTRAX MA-D', '30200'],
+            ['TTF', '12.00 R24', 'Steer', '12.00 R24 20PR 160/156K ENDUTRAX MA -D', '30590'],
+            ['TTF', '12.00R24', 'All Wheel', '12.00R24 18PR 158/155F ENDUTUFF MINING-D', '38410'],
+            ['TTF', '14.00 R20', 'All Wheel', '14.00 R20 22PR 164/161/166J ETM TL-D', '56760'],
+            ['TL', '16.00R20', 'All Wheel', '16.00R2022PR 173/170 ENDUTERRAMAXX A TLD', '77640'],
+            ['TL', '295/80 R22.5', 'Drive', '295/80 R22.5 16PR152/148KENDUTRAX MDTL-D', '24250'],
+            ['TL', '295/80 R22.5', 'Drive', '295/80 R22.5 152/148M ENDURACE RD2 TL-D', '24020'],
+            ['TTF', '295/80 R22.5', 'All Wheel', '295/80 R22.5 154M EnduRace RA(T)nRG TL-D', '23420'],
+            ['TL', '295/80 R22.5', 'All Wheel', '295/80 R22.5 152/148ENDURACE HA (46) -D', '23470'],
+            ['TL', '295/80 R22.5', 'All Wheel', '295/80 R22.516PR152/148M ENDUMILELHATL-D', '23470'],
+            ['TTF', '295/80R22.5', 'Drive', '295/80R22.5 152/148M EnduRaceRD NRG TL-D', '23800'],
+            ['TL', '295/80R22.5', 'Drive', '295/80R22.5 152/148MEnduRace RD2(LR)TL-D', '24750'],
+            ['TL', '295/80R22.5', 'Drive', '295/80R22.5 16PR152/148M ENDURACERD(23)D', '24370'],
+            ['TTF', '295/80R22.5', 'Steer', '295/80R22.5 154/149K ENDUTRAX MATL-D', '23190'],
+
+            // Pickup (Page 6)
+            ['TT', '7.00 R15', 'Pickup Radial Endumaxx', '7.00 R15 12PR 114/109Q ENDUMAXX LT HD-D', '8390'],
+            ['TTF', '7.00 R15', 'Pickup Radial Endumaxx', '7.00 R15 114/1090 ENDUMAXX LT HD (LV)-D', '8660'],
+            ['TTF', '7.00 R15', 'Pickup Radial Endurmaxx', '7.00 R15 12PR 114/1090 LV ENDUMAXX LT-D', '8410'],
+            ['TT', '7.00 R15', 'Pickup Radial Endumaxx', '7.00 R15 12PR 114/1090 ENDUMAXX LT-D', '8220'],
+            ['TT', '165 R14', 'Pickup Radial Endumaxx', '165 R14 8PR LT 97/95R ENDUMAXX LT-D', '4350'],
+            ['TL', '165 R14', 'Pickup Radial Endumaxx', '165 R14 LT 97/95 R 8PR ENDUMAXX LT TL-D', '3800'],
+            ['TT', '185 R14', 'Pickup Radial Endumaxx', '185 R14 10PR 107/105R ENDUMAXX LT-D', '5290'],
+            ['TL', '185 R14', 'Pickup Radial Endumaxx', '185 R14 10PR 107/105R ENDUMAXX LT TL-D', '4710'],
+            ['TT', '195 R15', 'Pickup Radial Endumaxx', '195 R15 8PR 107/105R ENDUMAXX LT-D', '6190'],
+            ['TL', '195 R15', 'Pickup Radial Endumaxx', '195 R15 8PR 107/105R ENDUMAXX LT TL-D', '5520'],
+            ['TL', '195 R15', 'Pickup Radial Endumaxx', '195 R15 8PR 107/105R ENDUMAXX LT TL-D', '5530'],
+            ['TT', '215 R14', 'Pickup Radial Endurmaxx', '215 R14 8PR 112/1100 ENDUMAXX LT-D', '7030'],
+            ['TL', '215 R14', 'Pickup Radial Endurmaxx', '215 R14 8PR 112/1100 EnduMaxx LT TL-D', '6510'],
+            ['TT', '215/75 R15', 'Pickup Radial Endumaxx', '215/75 R15 8PR 115/113S ENDUMAXX LT-D', '6540'],
+            ['TL', '215/75 R15', 'Pickup Radial Endumaxx', '215/75 R15 115/113S ENDUMAXX LT TL-D', '5710'],
+            ['TT', '215/75 R16', 'Pickup Radial Endumaxx', '215/75 R16 10PR 116/114S ENDUMAXX LT-D', '8440'],
+            ['TL', '215/75 R16', 'Pickup Radial Endumaxx', '215/75 R16 10PR 116/114S ENDUMAXXLT TL-D', '8240'],
+            ['TT', '7.00 R15', 'Pickup Radial Duramile', '7.00 R15 10PR DURAMILE-D', '7320'],
+            ['TT', '7.00 R15', 'Pickup Radial Duramile', '7.00 R15 12PR 114/109 Q DURAMILE-D (M1', '7870'],
+            ['TT', '7.00 R16', 'Pickup Radial Duramile', '7.00 R16 12PR 115/110N DURAMILE -D', '7680'],
+            ['TT', '7.00 R16', 'Pickup Radial Duramile', '7.00 R16 Q 12PR DURAMILE-D', '7700'],
+            ['TT', '7.00-15', 'Pickup Bias Vihaan lug', '7.00-15 114/109K 12PR VIHAAN LUG (SV)-D', '7780'],
+            ['TTF', '7.00-15', 'Pickup Bias Vihaan lug', '7.00-15 12PR VIHAAN LUG HD (LV) -D', '7890'],
+            ['TTF', '7.50-15', 'Pickup Bias Vihaan lug', '7.50-15 14PR VIHAAN LUG HD (LV) -D', '8500'],
+            ['TT', '7.00-15', 'Pickup Bias Vihaan Rib', '7.00-15 114/109K 12PR VIHAAN RIB (SV)-D', '6730'],
+            ['TT', '165 D14', 'Pickup Bias BHIM LUG', '165 D14 97K 8PR BHIM LUG-D (APOLLO)', '4500'],
+
+            // Tractor Rear (Page 9)
+            ['Tractor Rear', '11.2-24', 'General Agri BIAS', '11.2-24 8PR 116A6 VIRAT-D', '11600'],
+            ['Tractor Rear', '12.4-24', 'General Agri BIAS', '12.4-24 8PR 121A6 VIRAT-D', '14120'],
+            ['Tractor Rear', '12.4-28', 'General Agri BIAS', '12.4-28 12PR 125A6 VIRAT-D', '15970'],
+            ['Tractor Rear', '13.6-28', 'General Agri BIAS', '13.6-28 12PR 128 A6 VIRAT-D', '18860'],
+            ['Tractor Rear', '14.9-28', 'General Agri BIAS', '14.9-28 12PR 134 A6 VIRAT-D', '21280'],
+            ['Tractor Rear', '15.9-28', 'General Agri BIAS', '15.9-28 12PR 140A6 VIRAT-D', '23580'],
+            ['Tractor Rear', '16.9-28', 'General Agri BIAS', '16.9-28 12PR 143 A6 VIRAT - D', '25660'],
+            ['Tractor Rear', '17.9-28', 'General Agri BIAS', '17.9-28 12PR 144A6 VIRAT-D', '31530'],
+            ['Tractor Rear', '16.9-30', 'General Agri BIAS', '16.9-30 12PR 144A6 VIRAT-D', '29690'],
+            ['Tractor Rear', '12.4-28', 'General Agri BIAS', '12:4-28 12PR 125A6 VIRAT 23-D', '16270'],
+            ['Tractor Rear', '13.6-28', 'General Agri BIAS', '13.6-28 12PR VIRAT 23-D', '19190'],
+            ['Tractor Rear', '14.9-28', 'General Agri BIAS', '14.9-28 12PR VIRAT 23-D', '21720'],
+            ['Tractor Rear', '16.9-28', 'General Agri BIAS', '16.9-28 12PR VIRAT 23-D', '26960'],
+
+            // Tractor Rear (Page 10)
+            ['Tractor Rear', '8.00-18', 'Speciality COMPACT', '8-18 4PR A6 KRISHAK GOLD -D', '5720'],
+            ['Tractor Rear', '8.00-18', 'Speciality COMPACT', '8-18 6PR A6 KRISHAK GOLD -D', '5750'],
+            ['Tractor Rear', '8.3-20', 'Speciality COMPACT', '8.3-20 6PR 96 KRISHAK GOLD -D', '7350'],
+            ['Tractor Rear', '8.3-20', 'Speciality COMPACT', '8.3-20 6PR A6 KRISHAK GOLD (REACH) -D', '7400'],
+            ['Tractor Rear', '9.5-20', 'Speciality COMPACT', '9.5-20 6PR 102A6 KRISHAK GOLD -D', '9450'],
+            ['Tractor Rear', '9.5-24', 'Speciality COMPACT', '9.5-24 12PR AG KRISHAK GOLD -D', '9720'],
+            ['Tractor Rear', '9.5-24', 'Speciality COMPACT', '9.5-24 8PR KRISHAK SUPER-D', '10240'],
+            ['Tractor Rear', '8.3-24', 'Speciality COMPACT', '8.3-24 6PR FX 515-D', '8960'],
+            ['Tractor Rear', '8.3-32', 'Speciality ROW CROP', '8.3-32 8PR FX515-D', '9390'],
+            ['Tractor Rear', '8.3-36', 'Speciality ROW CROP', '8.3-36 8PR 113A6 FX515-D', '10120'],
+            ['Tractor Rear', '11.2-28', 'Speciality ROW CROP', '11.2-28 8PR FX 515-D', '13800'],
+            ['Tractor Rear', '11.2-32', 'Speciality ROW CROP', '11.2-32 8PR 120A6 FX515 TL-D', '15360'],
+            ['Tractor Rear', '11.2-32', 'Speciality ROW CROP', '11.2-32 8PR 120A6 FX515 TL-D', '15360'],
+            ['Tractor Rear', '12.4-32', 'Speciality ROW CROP', '12:4-32 8PR FX515-D', '17660'],
+        ];
+
+        const apolloHeaders = ['Type/Construction', 'Size', 'Fitment', 'Material Description', 'Recommended Customer Price (RCP) [INR]'];
+
+        function createTable(data, headers) {
+            let tableHTML = `
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                    <div class="table-container p-4">
+                        <table class="w-full text-sm text-left text-gray-700 mobile-table">
+                            <thead class="text-xs text-white uppercase bg-apollo-dark shadow-md">
+                                <tr>
+                                    ${headers.map(header => `<th scope="col" class="py-3 px-3">${header}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map((row, index) => `
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-apollo-highlight' : ''} hover:bg-gray-200 border-b border-gray-100">
+                                        ${row.map((cellData, colIndex) => `
+                                            <td data-label="${headers[colIndex]}" class="py-3 px-3 
+                                                ${colIndex === headers.length - 1 ? 'text-right font-extrabold text-lg text-apollo-dark' : ''} 
+                                                ${colIndex === 0 || colIndex === 1 ? 'font-medium text-gray-900' : ''}">
+                                                ${cellData}
+                                            </td>
+                                        `).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            return tableHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('app-container');
+            if (container) {
+                // Generate the Apollo Table
+                container.innerHTML = createTable(apolloData, apolloHeaders);
+            }
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

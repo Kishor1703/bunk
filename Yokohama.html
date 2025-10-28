@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yokohama India Price List - Complete</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <link rel="shortcut icon" href="images/Senthil Service Station Logo.png">
-    <!-- Load Tailwind CSS -->
+    <title>Yokohama India Pricelist - Complete</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,1520 +15,337 @@
                     },
                     colors: {
                         'continental-blue': '#002B5F',
-                        'continental-gold': '#FDD000',
+                        'yokohama-dark': '#001f3f', // Deep Navy
+                        'yokohama-highlight': '#002B5F', // Red
                     }
                 }
             }
         }
-    </script>   
+    </script>
     <style>
-        /* Custom Styles for better table appearance and responsiveness */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        thead th {
-    position: sticky;
-    top: 0;
-    /* Professional Blue Gradient - adjusted to be slightly darker */
-    background: linear-gradient(90deg, #0C356A 0%, #082142 100%);
-    color: #fff;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    font-size: 1rem; /* Slightly reduced for better mobile fit */
-    padding: 1rem 1rem;
-    text-align: center;
-    border-bottom: 4px solid #F5FEFF; /* Bright separator line */
-    z-index: 10; /* Ensures it stays on top */
-    white-space: nowrap; /* Prevents header wrapping unless necessary */
-}
+        /* Custom styles for better table visibility and fixed header on large screens */
         .table-container {
-            /* Enable horizontal scrolling on mobile */
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        th, td {
-            /* Ensure content fits without wrapping unnecessarily */
-            white-space: nowrap; 
-        }
-        .header-bg {
-            background-color: #0C356A; /* Yokohama Red (approx) */
-        }
-        .segment-header {
-             /* Dark Gray for segment title rows */
-            color: black;
-            font-weight: 700;
-            text-align: center;
-            font-size: 20px;
-        }
-         @media (max-width: 768px) {
-        body {
-            font-size: 14px;
+            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            overflow-y: auto;
+            padding-top: 10px;
         }
 
-        th, td {
-            padding: 8px 10px;
+        @media (min-width: 768px) {
+            .table-container thead th {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background-color: #001f3f; /* yokohama-dark */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
         }
 
-        table {
-            max-width: 200px;
-        }
+        /* Mobile-first: Making the table responsive by using data attributes */
+        @media (max-width: 767px) {
+            .mobile-table tr {
+                display: block;
+                margin-bottom: 1.5rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            }
 
-        .table-container {
-            padding: 6px;
-        }
-    }
+            .mobile-table thead {
+                display: none; /* Hide standard headers on mobile */
+            }
 
-    @media (max-width: 480px) {
-        body {
-            font-size: 12px;
-        }
+            .mobile-table td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border-bottom: 1px solid #f3f4f6;
+            }
 
-        th, td {
-            padding: 6px 8px;
+            .mobile-table td:before {
+                /* The content attribute retrieves the header text from the data-label attribute */
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: #4b5563;
+            }
+            .mobile-table td:last-child {
+                border-bottom: 0;
+            }
         }
-
-        table {
-            max-width: 500px;
-        }
-
-        .segment-header {
-            font-size: 13px;
-            padding: 8px;
-        }
-
-        th {
-            font-size: 13px;
-        }
-      }
     </style>
 </head>
-<body class="p-4 sm:p-6 md:p-10">
+
+<body class="bg-gray-50 font-sans text-gray-800 p-4 sm:p-8">
+     <div class="fixed bottom-8 right-8 z-50">
+        <button onclick="goBack()"
+            class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
+            <!-- SVG Icon for the Back Arrow -->
+            <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+    </div>
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-yokohama-dark">Yokohama India Recommended Price List</h1>
+            <p class="text-lg text-gray-600 mt-2">Complete List (Effective from 22nd September 2025)</p>
+        </div>
+
+        <main id="app-container" class="space-y-12">
+            </main>
+        
+        <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p>Prices are the **Yokohama Recommended Price (YRP) [INR]**.</p>
+            <p class="mt-1">Please note that prices are subject to change without prior notice.</p>
+            <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
+                <span class="font-semibold">Key:</span>
+                LI/SS: Load Index / Speed Symbol
+            </div>
+        </footer>
+    </div>
+
     <script>
+        // Data extracted and structured from the Yokohama PDF - All relevant rows included.
+        // Columns: [Code, Size, Rim (Inch), LI/SS, Pattern, YRP (₹)]
+        const yokohamaData = [
+            // 12 Inch
+            ['$1454', '145/80 R12', '12', '74T', 'Earth-1 Max', '3,130'],
+            // 13 Inch
+            ['$1155', '145/80 R13', '13', '75S', 'Earth-1 Max', '3,660'],
+            ['S1163', '155/65 R13', '13', '73T', 'Earth-1 Max', '3,890'],
+            ['$1157', '155/70 R13', '13', '75T', 'Earth-1 Max', '4,020'],
+            ['$1156', '155/80 R13', '13', '79T', 'Earth-1 Max', '4,340'],
+            ['S1164', '165/65 R13', '13', '77T', 'Earth-1 Max', '4,070'],
+            ['S1173', '175/60 R13', '13', '77H', 'Earth-1 Max', '4,680'],
+            ['$1158', '175/70 R13', '13', '82H', 'Earth-1 Max', '5,120'],
+            // 14 Inch
+            ['$1190', '155/65 R14', '14', '75H', 'Earth-1 Max', '3,970'],
+            ['S1165', '165/65 R14', '14', '79T', 'Earth-1 Max', '4,790'],
+            ['$1159', '165/70 R14', '14', '81T', 'Earth-1 Max', '4,130'],
+            ['$1179', '165/80 R14', '14', '85T', 'Earth-1 Max', '4,420'],
+            ['S1166', '175/65 R14', '14', '82H', 'Earth-1 Max', '5,570'],
+            ['$1160', '175/70 R14', '14', '84T', 'Earth-1 Max', '5,530'],
+            ['S2221', '175/70 R14', '14', '84H', 'GT Max', '5,630'],
+            ['S1174', '185/60 R14', '14', '82H', 'Earth-1 Max', '5,400'],
+            ['F8943', '185/60 R14', '14', '82H', 'AS01', '6,200'],
+            ['$1167', '185/65 R14', '14', '86H', 'Earth-1 Max', '5,850'],
+            ['S1161', '185/70 R14', '14', '88H', 'Earth-1 Max', '5,400'],
+            ['S2201', '185/70 R14', '14', '88H', 'GT Max', '6,040'],
+            ['S1175', '195/60 R14', '14', '86H', 'Earth-1 Max', '6,030'],
+            ['F8941', '195/60 R14', '14', '86H', 'AS01', '6,220'],
+            ['S1168', '195/65 R14', '14', '89H', 'Earth-1 Max', '6,220'],
+            ['F8944', '195/65 R14', '14', '89H', 'AS01', '5,740'],
+            ['$1162', '195/70 R14', '14', '91H', 'Earth-1 Max', '7,360'],
+            ['F8939', '205/60 R14', '14', '88H', 'AS01', '5,870'],
+            // 15 Inch
+            ['S2222', '175/60 R15', '15', '81H', 'GT Max', '6,570'],
+            ['S0318', '175/60 R15', '15', '81H', 'AE30', '6,350'],
+            ['S1169', '175/65 R15', '15', '84H', 'Earth-1 Max', '5,860'],
+            ['S2203', '175/65 R15', '15', '84H', 'GT Max', '5,960'],
+            ['S1176', '185/60 R15', '15', '84H', 'Earth-1 Max', '5,970'],
+            ['S2223', '185/60 R15', '15', '84H', 'GT Max', '6,060'],
+            ['$1170', '185/65 R15', '15', '88H', 'Earth-1 Max', '6,210'],
+            ['S2196', '185/65 R15', '15', '88H', 'GT Max', '6,300'],
+            ['S1192', '185/70 R15', '15', '89H', 'Earth-1 Max', '6,300'],
+            ['F8948', '195/50 R15', '15', '82V', 'AS01', '7,290'],
+            ['F8946', '195/55 R15', '15', '85V', 'AS01', '6,480'],
+            ['S2209', '195/60 R15', '15', '88V', 'GT Max', '6,880'],
+            ['$1177', '195/60 R15', '15', '88H', 'Earth-1 Max', '6,770'],
+            ['F8942', '195/60 R15', '15', '88H', 'AS01', '6,950'],
+            ['$1171', '195/65 R15', '15', '91H', 'Earth-1 Max', '6,940'],
+            ['S2216', '195/65 R15', '15', '91V', 'GT Max', '7,050'],
+            ['F8947', '205/50 R15', '15', '86V', 'AS01', '8,160'],
+            ['F8945', '205/55 R15', '15', '88V', 'AS01', '7,320'],
+            ['F8940', '205/60 R15', '15', '95H', 'AS01', '7,850'],
+            ['S1172', '205/65 R15', '15', '94H', 'Earth-1 Max', '7,380'],
+            ['R5727', '205/70 R15', '15', '96H', 'G015', '7,430'],
+            ['R5881', '205/70 R15', '15', '96H', 'G055', '7,070'],
+            ['R5880', '215/75 R15', '15', '100S', 'G015', '7,180'],
+            ['R5882', '215/75 R15', '15', '100S', 'G055', '6,810'],
+            ['R5730', '235/70 R15', '15', '103S', 'G015', '8,010'],
+            // 16 Inch
+            ['R5731', '205/60 R16', '16', '92H', 'G015', '8,790'],
+            ['R5872', '205/60 R16', '16', '92H', 'G055', '8,370'],
+            ['S0290', '205/60 R16', '16', '92V', 'AE61', '9,590'],
+            ['S2205', '205/65 R16', '16', '95H', 'GT Max', '7,890'],
+            ['$1180', '205/65 R16', '16', '95H', 'Earth-1 Max', '7,800'],
+            ['F8953', '215/55 R16', '16', '93V', 'AS01', '10,720'],
+            ['S2226', '215/60 R16', '16', '95H', 'GT Max', '9,510'],
+            ['$1181', '215/60 R16', '16', '95H', 'Earth-1 Max', '9,250'],
+            ['F8951', '215/60 R16', '16', '95H', 'AS01', '9,980'],
+            ['R5732', '215/60 R16', '16', '95H', 'G015', '9,810'],
+            ['R5873', '215/60 R16', '16', '95H', 'G055', '9,250'],
+            ['S2227', '215/65 R16', '16', '98H', 'GT Max', '9,910'],
+            ['$1182', '215/65 R16', '16', '98H', 'Earth-1 Max', '9,550'],
+            ['R5733', '215/65 R16', '16', '98H', 'G015', '10,210'],
+            ['R5874', '215/65 R16', '16', '98H', 'G055', '9,790'],
+            ['R8189', '215/65 R16', '16', '98H', 'G91A', '10,480'],
+            ['S2228', '225/55 R16', '16', '95W', 'GT Max', '10,870'],
+            ['R5734', '225/70 R16', '16', '103H', 'G015', '9,960'],
+            ['R5735', '235/60 R16', '16', '100H', 'G015', '10,480'],
+            ['R5875', '235/60 R16', '16', '100H', 'G055', '9,920'],
+            ['R5736', '235/65 R16', '16', '103H', 'G015', '10,780'],
+            ['R5737', '235/70 R16', '16', '106H', 'G015', '10,730'],
+            ['R5876', '235/70 R16', '16', '106H', 'G055', '10,210'],
+            ['R5738', '245/70 R16', '16', '111H', 'G015', '11,280'],
+            ['R5877', '245/70 R16', '16', '111H', 'G055', '10,710'],
+            ['R5739', '255/65 R16', '16', '109H', 'G015', '11,460'],
+            ['R5878', '255/65 R16', '16', '109H', 'G055', '10,910'],
+            ['R5740', '265/70 R16', '16', '112H', 'G015', '11,760'],
+            ['R5879', '265/70 R16', '16', '112H', 'G055', '11,200'],
+            // 17 Inch
+            ['R5741', '215/60 R17', '17', '96H', 'G015', '12,650'],
+            ['R5883', '215/60 R17', '17', '96H', 'G055', '12,020'],
+            ['S2229', '215/60 R17', '17', '96H', 'GT Max', '11,810'],
+            ['R5742', '225/60 R17', '17', '99H', 'G015', '12,980'],
+            ['R5884', '225/60 R17', '17', '99H', 'G055', '12,330'],
+            ['R5743', '225/65 R17', '17', '102H', 'G015', '12,930'],
+            ['R5885', '225/65 R17', '17', '102H', 'G055', '12,350'],
+            ['R5744', '235/60 R17', '17', '102H', 'G015', '13,110'],
+            ['R5886', '235/60 R17', '17', '102H', 'G055', '12,500'],
+            ['R5745', '235/65 R17', '17', '104H', 'G015', '13,440'],
+            ['R5887', '235/65 R17', '17', '104H', 'G055', '12,790'],
+            ['R5746', '245/65 R17', '17', '111T', 'G015', '13,590'],
+            ['R5888', '245/65 R17', '17', '111H', 'G055', '12,940'],
+            ['R5747', '265/65 R17', '17', '112H', 'G015', '14,080'],
+            ['R5889', '265/65 R17', '17', '112H', 'G055', '13,420'],
+            ['S0319', '205/45 R17', '17', '88W', 'AE61', '11,440'],
+            ['S0320', '205/50 R17', '17', '93V', 'AE61', '10,740'],
+            ['S0291', '215/45 R17', '17', '91W', 'AE61', '11,540'],
+            ['S0292', '215/50 R17', '17', '95W', 'AE61', '12,470'],
+            ['S0293', '225/45 R17', '17', '94W', 'AE61', '12,570'],
+            ['S0294', '225/50 R17', '17', '98W', 'AE61', '13,000'],
+            ['S0295', '225/55 R17', '17', '101W', 'AE61', '13,380'],
+            ['S0296', '235/45 R17', '17', '97W', 'AE61', '13,990'],
+            ['S0297', '235/50 R17', '17', '100W', 'AE61', '13,850'],
+            ['S0298', '235/55 R17', '17', '103V', 'AE61', '13,880'],
+            ['S0299', '245/45 R17', '17', '99W', 'AE61', '14,030'],
+            ['S0300', '245/50 R17', '17', '103W', 'AE61', '14,400'],
+            // 18 Inch
+            ['R5748', '225/55 R18', '18', '98H', 'G015', '15,080'],
+            ['R5890', '225/55 R18', '18', '98H', 'G055', '14,350'],
+            ['R5749', '235/55 R18', '18', '100H', 'G015', '15,660'],
+            ['R5891', '235/55 R18', '18', '100H', 'G055', '14,880'],
+            ['R5750', '235/60 R18', '18', '107H', 'G015', '16,040'],
+            ['R5892', '235/60 R18', '18', '107H', 'G055', '15,250'],
+            ['R5751', '245/60 R18', '18', '105H', 'G015', '16,210'],
+            ['R5893', '245/60 R18', '18', '105H', 'G055', '15,450'],
+            ['R5752', '255/55 R18', '18', '109H', 'G015', '16,400'],
+            ['R5894', '255/55 R18', '18', '109H', 'G055', '15,620'],
+            ['R5753', '265/60 R18', '18', '110H', 'G015', '17,210'],
+            ['R5895', '265/60 R18', '18', '110H', 'G055', '16,390'],
+            ['S0301', '225/40 R18', '18', '92W', 'AE61', '14,640'],
+            ['S0302', '225/45 R18', '18', '95W', 'AE61', '15,410'],
+            ['S0303', '225/50 R18', '18', '99W', 'AE61', '16,290'],
+            ['S0304', '235/40 R18', '18', '95W', 'AE61', '16,050'],
+            ['S0305', '235/45 R18', '18', '98W', 'AE61', '16,610'],
+            ['S0306', '245/40 R18', '18', '97W', 'AE61', '17,170'],
+            ['S0307', '245/45 R18', '18', '100W', 'AE61', '16,920'],
+            ['S0308', '245/50 R18', '18', '104W', 'AE61', '17,800'],
+            ['S0309', '255/40 R18', '18', '99Y', 'AE61', '18,500'],
+            ['S0310', '255/45 R18', '18', '103W', 'AE61', '19,300'],
+            // 19 Inch
+            ['R5754', '235/55 R19', '19', '105H', 'G015', '20,020'],
+            ['R5896', '235/55 R19', '19', '105H', 'G055', '19,050'],
+            ['R5755', '255/55 R19', '19', '111H', 'G015', '20,830'],
+            ['R5897', '255/55 R19', '19', '111H', 'G055', '19,830'],
+            ['S0311', '245/40 R19', '19', '98W', 'AE61', '21,110'],
+            ['S0312', '245/45 R19', '19', '102W', 'AE61', '21,550'],
+            ['S0313', '255/40 R19', '19', '100Y', 'AE61', '22,010'],
+            ['S0314', '255/45 R19', '19', '104W', 'AE61', '22,780'],
+            ['S0315', '275/35 R19', '19', '100Y', 'AE61', '23,550'],
+            ['S0316', '275/40 R19', '19', '105W', 'AE61', '24,200'],
+            ['R4537', '275/55 R19', '19', '111W', 'G057', '24,400'],
+            ['R7361', '295/30 R19', '19', '100Y', 'V105S', '36,710'],
+            // 20 Inch
+            ['R5756', '255/50 R20', '20', '109H', 'G015', '22,120'],
+            ['R5898', '255/50 R20', '20', '109H', 'G055', '21,070'],
+            ['R5757', '265/50 R20', '20', '111H', 'G015', '22,960'],
+            ['R5899', '265/50 R20', '20', '111H', 'G055', '21,870'],
+            ['R5758', '275/55 R20', '20', '117H', 'G015', '24,190'],
+            ['R5900', '275/55 R20', '20', '117H', 'G055', '23,010'],
+            ['R5759', '285/50 R20', '20', '116H', 'G015', '24,310'],
+            ['R5901', '285/50 R20', '20', '116H', 'G055', '23,120'],
+            ['R4860', '295/40 R20', '20', '106Y', 'V105S', '37,610'],
+            ['R7563', '275/40 R20', '20', '106Y', 'V107', '30,680'],
+            ['R7564', '275/45 R20', '20', '110Y', 'V107', '31,510'],
+            ['R7565', '285/35 R20', '20', '104Y', 'V107', '34,910'],
+            ['R7566', '285/40 R20', '20', '108Y', 'V107', '35,840'],
+            ['R7567', '295/35 R20', '20', '105Y', 'V107', '37,050'],
+            ['R4861', '245/45 R20', '20', '103Y', 'V105S', '28,150'],
+            ['R4862', '255/45 R20', '20', '105Y', 'V105S', '29,480'],
+            ['R4863', '265/45 R20', '20', '108Y', 'V105S', '30,800'],
+            // 21 Inch
+            ['R7568', '265/45 R21', '21', '108Y', 'V107', '38,720'],
+            ['R7569', '295/40 R21', '21', '111Y', 'V107', '42,030'],
+            ['R7570', '315/35 R21', '21', '111Y', 'V107', '43,940'],
+            // 22 Inch
+            ['R7571', '265/40 R22', '22', '106Y', 'V107', '41,400'],
+            ['R7572', '295/35 R22', '22', '107Y', 'V107', '45,390'],
+            // Run Flat Tires (RFT) - Listed Separately in the PDF
+            ['R7748', '205/55 R16', '16', '91W', 'V105S', '10,750'],
+            ['R7573', '225/45 R17', '17', '91W', 'V107', '13,380'],
+            ['R7749', '225/45 R17', '17', '91W', 'V105S', '13,380'],
+            ['R7750', '225/50 R17', '17', '94W', 'V105S', '14,480'],
+            ['R7751', '225/55 R17', '17', '97W', 'V105S', '14,830'],
+            ['R7752', '225/45 R18', '18', '95Y', 'V105S', '17,800'],
+            ['R7753', '245/45 R18', '18', '100Y', 'V105S', '18,800'],
+            ['R7754', '275/40 R18', '18', '103Y', 'V105S', '20,850'],
+            ['R1251', '275/35 RF19', 'RF19', '96Y', 'V105S', '33,720'],
+        ];
+
+        const yokohamaHeaders = ['Code', 'Size', 'Rim (Inch)', 'LI/SS', 'Pattern', 'YRP (₹)'];
+
+        function createTable(data, headers) {
+            let tableHTML = `
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+                    <div class="table-container p-4">
+                        <table class="w-full text-sm text-left text-gray-700 mobile-table">
+                            <thead class="text-xs text-white uppercase bg-yokohama-dark shadow-md">
+                                <tr>
+                                    ${headers.map(header => `<th scope="col" class="py-3 px-3">${header}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map((row, index) => `
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
+                                        ${row.map((cellData, colIndex) => `
+                                            <td data-label="${headers[colIndex]}" class="py-3 px-3 
+                                                ${colIndex === headers.length - 1 ? 'text-right font-extrabold text-lg text-yokohama-highlight' : ''} 
+                                                ${colIndex === 0 || colIndex === 1 ? 'font-medium text-gray-900' : ''}">
+                                                ${cellData}
+                                            </td>
+                                        `).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            return tableHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('app-container');
+            if (container) {
+                // Generate the complete Yokohama Table
+                container.innerHTML = createTable(yokohamaData, yokohamaHeaders);
+            }
+        });
         function goBack() {
             window.history.back();
         }
     </script>
-    <div class="fixed bottom-8 right-8 z-50">
-            <button onclick="goBack()" class="back-button flex items-center space-x-2 px-4 py-2 bg-continental-blue text-white font-semibold rounded-lg shadow-xl transition duration-300 ease-in-out hover:bg-blue-800 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-continental-blue/50 active:bg-blue-900">
-                <!-- SVG Icon for the Back Arrow -->
-                <svg class="back-icon w-5 h-5 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-                <span>Back</span>
-            </button>
-        </div>
-    <div class=" mx-auto bg-white rounded-xl shadow-2xl overflow-hidden">
-        
-        <!-- Header Section -->
-        <div class="p-6 header-bg text-white">
-            <h1 class="text-3xl sm:text-4xl font-extrabold mb-1">YOKOHAMA</h1>
-            <p class="text-sm sm:text-base font-medium">India Recommended Price List (Passenger Car Tyres)</p>
-        </div>
-
-        <!-- Table Container -->
-        <div class="p-4 table-container">
-            <table class="w-full text-sm text-gray-700 divide-y divide-gray-300">
-                <thead class="text-xs uppercase text-white">
-                    <tr class="header-bg">
-                        <th scope="col" class="py-3 px-3 sm:px-4 text-left rounded-tl-lg">Code</th>
-                        <th scope="col" class="py-3 px-3 sm:px-4 text-left">Size</th>
-                        <th scope="col" class="py-3 px-3 sm:px-4 text-center">Rim</th>
-                        <th scope="col" class="py-3 px-3 sm:px-4 text-center">LI/SS</th>
-                        <th scope="col" class="py-3 px-3 sm:px-4 text-left">Pattern</th>
-                        <th scope="col" class="py-3 px-3 sm:px-4 text-right rounded-tr-lg">YRP (INR)</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
-                    
-                    <!-- 12 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">12 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1454</td>
-                        <td class="py-3 px-3 sm:px-4">145/80 R12</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">12</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">74T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">3,130</td>
-                    </tr>
-
-                    <!-- 13 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">13 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1155</td>
-                        <td class="py-3 px-3 sm:px-4">145/80 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">75S</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">3,660</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1163</td>
-                        <td class="py-3 px-3 sm:px-4">155/65 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">73T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">3,890</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1157</td>
-                        <td class="py-3 px-3 sm:px-4">155/70 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">75T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,020</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1156</td>
-                        <td class="py-3 px-3 sm:px-4">155/80 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">79T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,340</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1164</td>
-                        <td class="py-3 px-3 sm:px-4">165/65 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">77T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,070</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1173</td>
-                        <td class="py-3 px-3 sm:px-4">175/60 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">77H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,680</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1158</td>
-                        <td class="py-3 px-3 sm:px-4">175/70 R13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">13</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">82H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,120</td>
-                    </tr>
-
-                    <!-- 14 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">14 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1190</td>
-                        <td class="py-3 px-3 sm:px-4">155/65 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">75H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">3,970</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1165</td>
-                        <td class="py-3 px-3 sm:px-4">165/65 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">79T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,790</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1159</td>
-                        <td class="py-3 px-3 sm:px-4">165/70 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">81T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,130</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1179</td>
-                        <td class="py-3 px-3 sm:px-4">165/80 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">85T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">4,420</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1166</td>
-                        <td class="py-3 px-3 sm:px-4">175/65 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">82H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,570</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1160</td>
-                        <td class="py-3 px-3 sm:px-4">175/70 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84T</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,530</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2221</td>
-                        <td class="py-3 px-3 sm:px-4">175/70 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,630</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1174</td>
-                        <td class="py-3 px-3 sm:px-4">185/60 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">82H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,400</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8943</td>
-                        <td class="py-3 px-3 sm:px-4">185/60 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">82H</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,640</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1167</td>
-                        <td class="py-3 px-3 sm:px-4">185/65 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">86H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,320</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1161</td>
-                        <td class="py-3 px-3 sm:px-4">185/70 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,940</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2201</td>
-                        <td class="py-3 px-3 sm:px-4">185/70 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,490</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1175</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">86H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,030</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8941</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">86H</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,220</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1168</td>
-                        <td class="py-3 px-3 sm:px-4">195/65 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">89H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,660</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8944</td>
-                        <td class="py-3 px-3 sm:px-4">195/65 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">89H</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,740</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1162</td>
-                        <td class="py-3 px-3 sm:px-4">195/70 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,690</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8939</td>
-                        <td class="py-3 px-3 sm:px-4">205/60 R14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">14</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,870</td>
-                    </tr>
-
-                    <!-- 15 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">15 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2222</td>
-                        <td class="py-3 px-3 sm:px-4">175/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">81H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,570</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S0318</td>
-                        <td class="py-3 px-3 sm:px-4">175/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">81H</td>
-                        <td class="py-3 px-3 sm:px-4">AE30</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,350</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1169</td>
-                        <td class="py-3 px-3 sm:px-4">175/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,860</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2203</td>
-                        <td class="py-3 px-3 sm:px-4">175/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,960</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1176</td>
-                        <td class="py-3 px-3 sm:px-4">185/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">5,970</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2223</td>
-                        <td class="py-3 px-3 sm:px-4">185/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,060</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1170</td>
-                        <td class="py-3 px-3 sm:px-4">185/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,210</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2196</td>
-                        <td class="py-3 px-3 sm:px-4">185/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,300</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1192</td>
-                        <td class="py-3 px-3 sm:px-4">185/70 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">89H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,300</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8948</td>
-                        <td class="py-3 px-3 sm:px-4">195/50 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">82V</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,290</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8946</td>
-                        <td class="py-3 px-3 sm:px-4">195/55 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">85V</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,480</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2209</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,880</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1177</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,770</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8942</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88H</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,950</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1171</td>
-                        <td class="py-3 px-3 sm:px-4">195/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,940</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2216</td>
-                        <td class="py-3 px-3 sm:px-4">195/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,050</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8947</td>
-                        <td class="py-3 px-3 sm:px-4">205/50 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">86V</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,160</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8945</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">88V</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,320</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8940</td>
-                        <td class="py-3 px-3 sm:px-4">205/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95H</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,850</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1172</td>
-                        <td class="py-3 px-3 sm:px-4">205/65 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,380</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5727</td>
-                        <td class="py-3 px-3 sm:px-4">205/70 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,430</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5881</td>
-                        <td class="py-3 px-3 sm:px-4">205/70 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96H</td>
-                        <td class="py-3 px-3 sm:px-4">G055</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,070</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5880</td>
-                        <td class="py-3 px-3 sm:px-4">215/75 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100S</td>
-                        <td class="py-3 px-3 sm:px-4">G015.</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,180</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1178</td>
-                        <td class="py-3 px-3 sm:px-4">225/60 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,430</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5873</td>
-                        <td class="py-3 px-3 sm:px-4">235/70 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">103S</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,520</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R8331</td>
-                        <td class="py-3 px-3 sm:px-4">235/75 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">105T</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,980</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5874</td>
-                        <td class="py-3 px-3 sm:px-4">265/70 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">112H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,020</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E5693</td>
-                        <td class="py-3 px-3 sm:px-4">LT215/75 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100/97S</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,720</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4525</td>
-                        <td class="py-3 px-3 sm:px-4">LT215/75 R15 (OWL)</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100/97S</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,470</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E5694</td>
-                        <td class="py-3 px-3 sm:px-4">LT235/75 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">104/101S</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,920</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4519</td>
-                        <td class="py-3 px-3 sm:px-4">LT235/75 R15 (OWL)</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">104101S/</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,860</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4518</td>
-                        <td class="py-3 px-3 sm:px-4">31X10.5 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">109S</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,900</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4692</td>
-                        <td class="py-3 px-3 sm:px-4">31X10.5 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">1090</td>
-                        <td class="py-3 px-3 sm:px-4">G003</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">16,140</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4700</td>
-                        <td class="py-3 px-3 sm:px-4">33X12.5 R15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">15</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">108Q</td>
-                        <td class="py-3 px-3 sm:px-4">G003</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">18,280</td>
-                    </tr>
-
-                    <!-- 16 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">16 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2198</td>
-                        <td class="py-3 px-3 sm:px-4">185/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">83V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,500</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1193</td>
-                        <td class="py-3 px-3 sm:px-4">185/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">86H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">6,760</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1180</td>
-                        <td class="py-3 px-3 sm:px-4">195/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">87V</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,340</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2199</td>
-                        <td class="py-3 px-3 sm:px-4">195/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">87V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,490</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5252</td>
-                        <td class="py-3 px-3 sm:px-4">195/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">87V</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,520</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R6111</td>
-                        <td class="py-3 px-3 sm:px-4">195/55 RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">87V</td>
-                        <td class="py-3 px-3 sm:px-4">V013</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,350</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1191</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">89H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,130</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2217</td>
-                        <td class="py-3 px-3 sm:px-4">195/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">89H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,280</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1183</td>
-                        <td class="py-3 px-3 sm:px-4">205/50 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">87V</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,880</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1181</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94V</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,100</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2208</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,250</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9383</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94V</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,260</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F4773</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91V</td>
-                        <td class="py-3 px-3 sm:px-4">AC02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,330</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F9043</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91W</td>
-                        <td class="py-3 px-3 sm:px-4">V103</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,930</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1182</td>
-                        <td class="py-3 px-3 sm:px-4">205/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">92V</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,750</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2210</td>
-                        <td class="py-3 px-3 sm:px-4">205/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">92H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,870</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5870</td>
-                        <td class="py-3 px-3 sm:px-4">205/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">92H</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,890</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1184</td>
-                        <td class="py-3 px-3 sm:px-4">205/65 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,530</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2197</td>
-                        <td class="py-3 px-3 sm:px-4">205/65 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,650</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5735</td>
-                        <td class="py-3 px-3 sm:px-4">205/65 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95H</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">7,670</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2219</td>
-                        <td class="py-3 px-3 sm:px-4">215/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">97H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,740</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1185</td>
-                        <td class="py-3 px-3 sm:px-4">215/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,450</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2212</td>
-                        <td class="py-3 px-3 sm:px-4">215/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">99V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,620</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5869</td>
-                        <td class="py-3 px-3 sm:px-4">215/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95H</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,640</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5876</td>
-                        <td class="py-3 px-3 sm:px-4">215/65 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">98H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,540</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5882</td>
-                        <td class="py-3 px-3 sm:px-4">215/65 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">98H</td>
-                        <td class="py-3 px-3 sm:px-4">G055</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,130</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2225</td>
-                        <td class="py-3 px-3 sm:px-4">225/50 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">92W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,580</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F9050</td>
-                        <td class="py-3 px-3 sm:px-4">225/50 RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">92W</td>
-                        <td class="py-3 px-3 sm:px-4">V103</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">14,440</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2213</td>
-                        <td class="py-3 px-3 sm:px-4">225/55 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">99W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max.</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,920</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1247</td>
-                        <td class="py-3 px-3 sm:px-4">225/55 RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95W</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">15,760</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2207</td>
-                        <td class="py-3 px-3 sm:px-4">225/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">98V</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,510</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5883</td>
-                        <td class="py-3 px-3 sm:px-4">235/60 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">104V</td>
-                        <td class="py-3 px-3 sm:px-4">G055</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,700</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5875</td>
-                        <td class="py-3 px-3 sm:px-4">235/70 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">106H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">8,980</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S0415</td>
-                        <td class="py-3 px-3 sm:px-4">245/75 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">115T</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,940</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S0414</td>
-                        <td class="py-3 px-3 sm:px-4">255/65 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">109H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">12,070</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1155</td>
-                        <td class="py-3 px-3 sm:px-4">275/70 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">114H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,170</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4698</td>
-                        <td class="py-3 px-3 sm:px-4">LT235/85 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">120/116Q</td>
-                        <td class="py-3 px-3 sm:px-4">G003</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">22,260</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4701</td>
-                        <td class="py-3 px-3 sm:px-4">LT245/75 R16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">16</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">120/1160</td>
-                        <td class="py-3 px-3 sm:px-4">G003</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">21,860</td>
-                    </tr>
-
-                    <!-- 17 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">17 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R6112</td>
-                        <td class="py-3 px-3 sm:px-4">205/45 RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">84V</td>
-                        <td class="py-3 px-3 sm:px-4">V013</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">17,600</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1248</td>
-                        <td class="py-3 px-3 sm:px-4">205/50 RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">89W</td>
-                        <td class="py-3 px-3 sm:px-4">V013</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">19,870</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S0568</td>
-                        <td class="py-3 px-3 sm:px-4">205/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91V</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,440</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2204</td>
-                        <td class="py-3 px-3 sm:px-4">215/45 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,080</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9384</td>
-                        <td class="py-3 px-3 sm:px-4">215/45 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91W</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">9,990</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R4798</td>
-                        <td class="py-3 px-3 sm:px-4">215/50 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91V</td>
-                        <td class="py-3 px-3 sm:px-4">V551</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,090</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1186</td>
-                        <td class="py-3 px-3 sm:px-4">215/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94V</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,620</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2215</td>
-                        <td class="py-3 px-3 sm:px-4">215/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,820</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1187</td>
-                        <td class="py-3 px-3 sm:px-4">215/60 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,200</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2205</td>
-                        <td class="py-3 px-3 sm:px-4">215/60 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96H</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,440</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5872</td>
-                        <td class="py-3 px-3 sm:px-4">215/60 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96H</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">10,490</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2202</td>
-                        <td class="py-3 px-3 sm:px-4">225/45 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,630</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9385</td>
-                        <td class="py-3 px-3 sm:px-4">225/45 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91W</td>
-                        <td class="py-3 px-3 sm:px-4">AS01</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,640</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F9048</td>
-                        <td class="py-3 px-3 sm:px-4">225/45 RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91Y</td>
-                        <td class="py-3 px-3 sm:px-4">V103</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">17,520</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2200</td>
-                        <td class="py-3 px-3 sm:px-4">225/50 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,760</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R6109</td>
-                        <td class="py-3 px-3 sm:px-4">225/50 RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94Y</td>
-                        <td class="py-3 px-3 sm:px-4">V103</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">16,540</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1188</td>
-                        <td class="py-3 px-3 sm:px-4">225/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">101W</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,470</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2211</td>
-                        <td class="py-3 px-3 sm:px-4">225/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">101W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,680</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1249</td>
-                        <td class="py-3 px-3 sm:px-4">225/55 RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">97Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">17,730</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S1189</td>
-                        <td class="py-3 px-3 sm:px-4">225/60 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">99H</td>
-                        <td class="py-3 px-3 sm:px-4">Earth-1 Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">11,440</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2206</td>
-                        <td class="py-3 px-3 sm:px-4">235/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">99W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,550</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5871</td>
-                        <td class="py-3 px-3 sm:px-4">235/55 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">103W</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,640</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5878</td>
-                        <td class="py-3 px-3 sm:px-4">235/65 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">108H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,080</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5885</td>
-                        <td class="py-3 px-3 sm:px-4">235/65 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">108V</td>
-                        <td class="py-3 px-3 sm:px-4">G055</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">12,500</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2214</td>
-                        <td class="py-3 px-3 sm:px-4">245/45 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,250</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S0416</td>
-                        <td class="py-3 px-3 sm:px-4">245/65 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">111H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,630</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5884</td>
-                        <td class="py-3 px-3 sm:px-4">255/60 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">106H</td>
-                        <td class="py-3 px-3 sm:px-4">G055</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,580</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5877</td>
-                        <td class="py-3 px-3 sm:px-4">265/65 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">112H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,890</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R5879</td>
-                        <td class="py-3 px-3 sm:px-4">275/65 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">115H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">14,220</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E5165</td>
-                        <td class="py-3 px-3 sm:px-4">LT265/65 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">120/117Q</td>
-                        <td class="py-3 px-3 sm:px-4">G016</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">22,710</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E4650</td>
-                        <td class="py-3 px-3 sm:px-4">LT265/70 R17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">17</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">121/118Q</td>
-                        <td class="py-3 px-3 sm:px-4">G003</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">25,160</td>
-                    </tr>
-
-                    <!-- 18 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">18 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9451</td>
-                        <td class="py-3 px-3 sm:px-4">215/55 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">99V</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">12,440</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1244</td>
-                        <td class="py-3 px-3 sm:px-4">225/45 RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">91Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">21,190</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R8495</td>
-                        <td class="py-3 px-3 sm:px-4">225/50 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">95V</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">14,340</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R8496</td>
-                        <td class="py-3 px-3 sm:px-4">225/55 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">98V</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">13,780</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F5398</td>
-                        <td class="py-3 px-3 sm:px-4">235/50 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">97V</td>
-                        <td class="py-3 px-3 sm:px-4">AC02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">19,330</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9452</td>
-                        <td class="py-3 px-3 sm:px-4">235/55 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">104V</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">16,340</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R8497</td>
-                        <td class="py-3 px-3 sm:px-4">235/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">107V</td>
-                        <td class="py-3 px-3 sm:px-4">RV02</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">16,000</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9446</td>
-                        <td class="py-3 px-3 sm:px-4">235/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">107V</td>
-                        <td class="py-3 px-3 sm:px-4">G055</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">16,310</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1243</td>
-                        <td class="py-3 px-3 sm:px-4">245/40 RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">93Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">23,300</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2218</td>
-                        <td class="py-3 px-3 sm:px-4">245/45 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">15,790</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1252</td>
-                        <td class="py-3 px-3 sm:px-4">245/45 RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">22,040</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2220</td>
-                        <td class="py-3 px-3 sm:px-4">245/50 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">16,340</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R6113</td>
-                        <td class="py-3 px-3 sm:px-4">245/50 RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100W</td>
-                        <td class="py-3 px-3 sm:px-4">V103</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">21,690</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9465</td>
-                        <td class="py-3 px-3 sm:px-4">255/55 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">109W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">17,530</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9261</td>
-                        <td class="py-3 px-3 sm:px-4">255/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">ABH</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">15,000</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9445</td>
-                        <td class="py-3 px-3 sm:px-4">255/65 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">111H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">14,170</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R8332</td>
-                        <td class="py-3 px-3 sm:px-4">265/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">110H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">17,740</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R2240</td>
-                        <td class="py-3 px-3 sm:px-4">275/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">113H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">17,790</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R8333</td>
-                        <td class="py-3 px-3 sm:px-4">285/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">116H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">19,550</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">E5166</td>
-                        <td class="py-3 px-3 sm:px-4">LT285/60 R18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">18</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">122/119Q</td>
-                        <td class="py-3 px-3 sm:px-4">G016</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">31,610</td>
-                    </tr>
-
-                    <!-- 19 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">19 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9467</td>
-                        <td class="py-3 px-3 sm:px-4">235/55 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">105W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">18,700</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1250</td>
-                        <td class="py-3 px-3 sm:px-4">245/40 RF19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">94Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">29,470</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">S2224</td>
-                        <td class="py-3 px-3 sm:px-4">245/45 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">98W</td>
-                        <td class="py-3 px-3 sm:px-4">GT Max</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">20,790</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R7359</td>
-                        <td class="py-3 px-3 sm:px-4">255/35 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">31,200</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F7081</td>
-                        <td class="py-3 px-3 sm:px-4">255/40 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">24,810</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9466</td>
-                        <td class="py-3 px-3 sm:px-4">255/50 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">107W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">20,430</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9468</td>
-                        <td class="py-3 px-3 sm:px-4">255/55 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">109W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">20,230</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R1251</td>
-                        <td class="py-3 px-3 sm:px-4">275/35 RF19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">RF19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">96Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">33,720</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R7562</td>
-                        <td class="py-3 px-3 sm:px-4">275/40 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">105Y</td>
-                        <td class="py-3 px-3 sm:px-4">V107</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">26,160</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R4537</td>
-                        <td class="py-3 px-3 sm:px-4">275/55 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">111W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">24,400</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R7361</td>
-                        <td class="py-3 px-3 sm:px-4">295/30 R19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">19</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">100Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105S</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">36,710</td>
-                    </tr>
-
-                    <!-- 20 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">20 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R4540</td>
-                        <td class="py-3 px-3 sm:px-4">255/50 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">110W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">21,300</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9469</td>
-                        <td class="py-3 px-3 sm:px-4">255/55 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">110W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">24,680</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9470</td>
-                        <td class="py-3 px-3 sm:px-4">275/45 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">110W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">26,190</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R9471</td>
-                        <td class="py-3 px-3 sm:px-4">275/50 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">113W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">24,960</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R6155</td>
-                        <td class="py-3 px-3 sm:px-4">275/40 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">106Y</td>
-                        <td class="py-3 px-3 sm:px-4">V103B</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">26,320</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F2058</td>
-                        <td class="py-3 px-3 sm:px-4">275/45 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">110Y</td>
-                        <td class="py-3 px-3 sm:px-4">V103B</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">23,920</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R2245</td>
-                        <td class="py-3 px-3 sm:px-4">285/50 R20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">20</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">112H</td>
-                        <td class="py-3 px-3 sm:px-4">G015</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">22,000</td>
-                    </tr>
-
-                    <!-- 21 Inch Segment -->
-                    <tr class="segment-header"><td colspan="6" class="py-2">21 Inch</td></tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">R4548</td>
-                        <td class="py-3 px-3 sm:px-4">275/40 R21</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">21</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">107W</td>
-                        <td class="py-3 px-3 sm:px-4">G057</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">32,420</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-3 px-3 sm:px-4 font-semibold">F8199</td>
-                        <td class="py-3 px-3 sm:px-4">295/35 R21</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">21</td>
-                        <td class="py-3 px-3 sm:px-4 text-center">107Y</td>
-                        <td class="py-3 px-3 sm:px-4">V105</td>
-                        <td class="py-3 px-3 sm:px-4 text-right font-bold text-red-600">34,110</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Footer Notes -->
-        
-    </div>
 </body>
 </html>
