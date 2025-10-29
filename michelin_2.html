@@ -185,10 +185,10 @@
                             </thead>
                             <tbody>
                                 ${data.map((row, index) => `
-                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
+                                    <tr class="bg-white text-lg hover:bg-gray-100 border-b border-gray-100">
                                         ${row.map((cellData, colIndex) => `
                                             <td data-label="${headers[colIndex]}" class="py-3 px-3 
-                                                ${colIndex === headers.length - 1 ? 'text-right font-extrabold text-lg text-continental-blue' : ''} 
+                                                ${colIndex === headers.length - 1 ? ' font-extrabold text-lg text-continental-blue' : ''} 
                                                 ${colIndex === 0 || colIndex === 1 ? 'font-medium text-gray-900' : ''}">
                                                 ${cellData}
                                             </td>

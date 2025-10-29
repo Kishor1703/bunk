@@ -31,7 +31,9 @@
             /* Limits table height for scrollability on large displays */
             overflow-y: auto;
             padding-top: 10px;
+            
         }
+    
 
         @media (min-width: 768px) {
             .table-container thead th {
@@ -146,9 +148,7 @@
         </main>
 
         <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
-            <p>Prices are Valid for Tubeless Tyres Only.</p>
-            <p>Prices are liable to change without notice and those prevailing at the time of invoicing/dispatch will be
-                applicable.</p>
+           
             <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
                 <span class="font-semibold">Key:</span>
                 LI/SI: Load Index/Speed | FR: Flange Rib | XL: Extra load
@@ -218,12 +218,12 @@
                             </thead>
                             <tbody>
                                 ${data.map((row, index) => `
-                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100 text-lg">
                                         <td data-label="${headers[0]}" class="py-3 px-3 font-medium text-gray-900">${row[0]}</td>
                                         <td data-label="${headers[1]}" class="py-3 px-3">${row[1]}</td>
                                         <td data-label="${headers[2]}" class="py-3 px-3">${row[2]}</td>
                                         <td data-label="${headers[3]}" class="py-3 px-3 font-semibold">${row[3]}</td>
-                                        <td data-label="${headers[4]}" class="py-3 px-3 text-continental-blue font-extrabold text-right">${row[4]}</td>
+                                        <td data-label="${headers[4]}" class="py-3 px-3 text-continental-blue font-extrabold text-lg ">${row[4]}</td>
                                     </tr>
                                 `).join('')}
                             </tbody>

@@ -25,17 +25,21 @@
     <style>
         /* Custom styles for better table visibility and fixed header on large screens */
         .table-container {
-            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            max-height: 80vh;
+            /* Limits table height for scrollability on large displays */
             overflow-y: auto;
             padding-top: 10px;
+            
         }
+    
 
         @media (min-width: 768px) {
             .table-container thead th {
                 position: sticky;
                 top: 0;
                 z-index: 10;
-                background-color: #001f3f; /* apollo-dark */
+                background-color: #002B5F;
+                /* continental-blue */
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
         }
@@ -52,7 +56,8 @@
             }
 
             .mobile-table thead {
-                display: none; /* Hide standard headers on mobile */
+                display: none;
+                /* Hide standard headers on mobile */
             }
 
             .mobile-table td {
@@ -64,7 +69,6 @@
             }
 
             .mobile-table td:before {
-                /* The content attribute retrieves the header text from the data-label attribute */
                 content: attr(data-label);
                 position: absolute;
                 left: 0.75rem;
@@ -75,6 +79,7 @@
                 font-weight: 600;
                 color: #4b5563;
             }
+
             .mobile-table td:last-child {
                 border-bottom: 0;
             }
@@ -282,7 +287,7 @@
             ['Tractor Rear', '12.4-32', 'Speciality ROW CROP', '12:4-32 8PR FX515-D', '17660'],
         ];
 
-        const apolloHeaders = ['Type/Construction', 'Size', 'Fitment', 'Material Description', 'Recommended Customer Price (RCP) [INR]'];
+        const apolloHeaders = ['Type/Construction', 'Size', 'Fitment', 'Material Description', 'RCP(in INR)'];
 
         function createTable(data, headers) {
             let tableHTML = `
@@ -296,10 +301,10 @@
                             </thead>
                             <tbody>
                                 ${data.map((row, index) => `
-                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-apollo-highlight' : ''} hover:bg-gray-200 border-b border-gray-100">
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-apollo-highlight' : ''} hover:bg-gray-200 border-b border-gray-100 text-lg">
                                         ${row.map((cellData, colIndex) => `
                                             <td data-label="${headers[colIndex]}" class="py-3 px-3 
-                                                ${colIndex === headers.length - 1 ? 'text-right font-extrabold text-lg text-apollo-dark' : ''} 
+                                                ${colIndex === headers.length - 1 ? ' font-extrabold text-lg text-apollo-dark' : ''} 
                                                 ${colIndex === 0 || colIndex === 1 ? 'font-medium text-gray-900' : ''}">
                                                 ${cellData}
                                             </td>

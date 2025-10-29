@@ -25,17 +25,21 @@
     <style>
         /* Custom styles for better table visibility and fixed header on large screens */
         .table-container {
-            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            max-height: 80vh;
+            /* Limits table height for scrollability on large displays */
             overflow-y: auto;
             padding-top: 10px;
+            
         }
+    
 
         @media (min-width: 768px) {
             .table-container thead th {
                 position: sticky;
                 top: 0;
                 z-index: 10;
-                background-color: #001f3f; /* yokohama-dark */
+                background-color: #002B5F;
+                /* continental-blue */
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
         }
@@ -52,7 +56,8 @@
             }
 
             .mobile-table thead {
-                display: none; /* Hide standard headers on mobile */
+                display: none;
+                /* Hide standard headers on mobile */
             }
 
             .mobile-table td {
@@ -64,7 +69,6 @@
             }
 
             .mobile-table td:before {
-                /* The content attribute retrieves the header text from the data-label attribute */
                 content: attr(data-label);
                 position: absolute;
                 left: 0.75rem;
@@ -75,6 +79,7 @@
                 font-weight: 600;
                 color: #4b5563;
             }
+
             .mobile-table td:last-child {
                 border-bottom: 0;
             }
@@ -119,33 +124,33 @@
         // Columns: [Code, Size, Rim (Inch), LI/SS, Pattern, YRP (₹)]
         const yokohamaData = [
             // 12 Inch
-            ['$1454', '145/80 R12', '12', '74T', 'Earth-1 Max', '3,130'],
+            ['S1454', '145/80 R12', '12', '74T', 'Earth-1 Max', '3,130'],
             // 13 Inch
-            ['$1155', '145/80 R13', '13', '75S', 'Earth-1 Max', '3,660'],
+            ['S1155', '145/80 R13', '13', '75S', 'Earth-1 Max', '3,660'],
             ['S1163', '155/65 R13', '13', '73T', 'Earth-1 Max', '3,890'],
-            ['$1157', '155/70 R13', '13', '75T', 'Earth-1 Max', '4,020'],
-            ['$1156', '155/80 R13', '13', '79T', 'Earth-1 Max', '4,340'],
+            ['S1157', '155/70 R13', '13', '75T', 'Earth-1 Max', '4,020'],
+            ['S1156', '155/80 R13', '13', '79T', 'Earth-1 Max', '4,340'],
             ['S1164', '165/65 R13', '13', '77T', 'Earth-1 Max', '4,070'],
             ['S1173', '175/60 R13', '13', '77H', 'Earth-1 Max', '4,680'],
-            ['$1158', '175/70 R13', '13', '82H', 'Earth-1 Max', '5,120'],
+            ['S1158', '175/70 R13', '13', '82H', 'Earth-1 Max', '5,120'],
             // 14 Inch
-            ['$1190', '155/65 R14', '14', '75H', 'Earth-1 Max', '3,970'],
+            ['S1190', '155/65 R14', '14', '75H', 'Earth-1 Max', '3,970'],
             ['S1165', '165/65 R14', '14', '79T', 'Earth-1 Max', '4,790'],
-            ['$1159', '165/70 R14', '14', '81T', 'Earth-1 Max', '4,130'],
-            ['$1179', '165/80 R14', '14', '85T', 'Earth-1 Max', '4,420'],
+            ['S1159', '165/70 R14', '14', '81T', 'Earth-1 Max', '4,130'],
+            ['S1179', '165/80 R14', '14', '85T', 'Earth-1 Max', '4,420'],
             ['S1166', '175/65 R14', '14', '82H', 'Earth-1 Max', '5,570'],
-            ['$1160', '175/70 R14', '14', '84T', 'Earth-1 Max', '5,530'],
+            ['S1160', '175/70 R14', '14', '84T', 'Earth-1 Max', '5,530'],
             ['S2221', '175/70 R14', '14', '84H', 'GT Max', '5,630'],
             ['S1174', '185/60 R14', '14', '82H', 'Earth-1 Max', '5,400'],
             ['F8943', '185/60 R14', '14', '82H', 'AS01', '6,200'],
-            ['$1167', '185/65 R14', '14', '86H', 'Earth-1 Max', '5,850'],
+            ['S1167', '185/65 R14', '14', '86H', 'Earth-1 Max', '5,850'],
             ['S1161', '185/70 R14', '14', '88H', 'Earth-1 Max', '5,400'],
             ['S2201', '185/70 R14', '14', '88H', 'GT Max', '6,040'],
             ['S1175', '195/60 R14', '14', '86H', 'Earth-1 Max', '6,030'],
             ['F8941', '195/60 R14', '14', '86H', 'AS01', '6,220'],
             ['S1168', '195/65 R14', '14', '89H', 'Earth-1 Max', '6,220'],
             ['F8944', '195/65 R14', '14', '89H', 'AS01', '5,740'],
-            ['$1162', '195/70 R14', '14', '91H', 'Earth-1 Max', '7,360'],
+            ['S1162', '195/70 R14', '14', '91H', 'Earth-1 Max', '7,360'],
             ['F8939', '205/60 R14', '14', '88H', 'AS01', '5,870'],
             // 15 Inch
             ['S2222', '175/60 R15', '15', '81H', 'GT Max', '6,570'],
@@ -154,15 +159,15 @@
             ['S2203', '175/65 R15', '15', '84H', 'GT Max', '5,960'],
             ['S1176', '185/60 R15', '15', '84H', 'Earth-1 Max', '5,970'],
             ['S2223', '185/60 R15', '15', '84H', 'GT Max', '6,060'],
-            ['$1170', '185/65 R15', '15', '88H', 'Earth-1 Max', '6,210'],
+            ['S1170', '185/65 R15', '15', '88H', 'Earth-1 Max', '6,210'],
             ['S2196', '185/65 R15', '15', '88H', 'GT Max', '6,300'],
             ['S1192', '185/70 R15', '15', '89H', 'Earth-1 Max', '6,300'],
             ['F8948', '195/50 R15', '15', '82V', 'AS01', '7,290'],
             ['F8946', '195/55 R15', '15', '85V', 'AS01', '6,480'],
             ['S2209', '195/60 R15', '15', '88V', 'GT Max', '6,880'],
-            ['$1177', '195/60 R15', '15', '88H', 'Earth-1 Max', '6,770'],
+            ['S1177', '195/60 R15', '15', '88H', 'Earth-1 Max', '6,770'],
             ['F8942', '195/60 R15', '15', '88H', 'AS01', '6,950'],
-            ['$1171', '195/65 R15', '15', '91H', 'Earth-1 Max', '6,940'],
+            ['S1171', '195/65 R15', '15', '91H', 'Earth-1 Max', '6,940'],
             ['S2216', '195/65 R15', '15', '91V', 'GT Max', '7,050'],
             ['F8947', '205/50 R15', '15', '86V', 'AS01', '8,160'],
             ['F8945', '205/55 R15', '15', '88V', 'AS01', '7,320'],
@@ -178,15 +183,15 @@
             ['R5872', '205/60 R16', '16', '92H', 'G055', '8,370'],
             ['S0290', '205/60 R16', '16', '92V', 'AE61', '9,590'],
             ['S2205', '205/65 R16', '16', '95H', 'GT Max', '7,890'],
-            ['$1180', '205/65 R16', '16', '95H', 'Earth-1 Max', '7,800'],
+            ['S1180', '205/65 R16', '16', '95H', 'Earth-1 Max', '7,800'],
             ['F8953', '215/55 R16', '16', '93V', 'AS01', '10,720'],
             ['S2226', '215/60 R16', '16', '95H', 'GT Max', '9,510'],
-            ['$1181', '215/60 R16', '16', '95H', 'Earth-1 Max', '9,250'],
+            ['S1181', '215/60 R16', '16', '95H', 'Earth-1 Max', '9,250'],
             ['F8951', '215/60 R16', '16', '95H', 'AS01', '9,980'],
             ['R5732', '215/60 R16', '16', '95H', 'G015', '9,810'],
             ['R5873', '215/60 R16', '16', '95H', 'G055', '9,250'],
             ['S2227', '215/65 R16', '16', '98H', 'GT Max', '9,910'],
-            ['$1182', '215/65 R16', '16', '98H', 'Earth-1 Max', '9,550'],
+            ['S1182', '215/65 R16', '16', '98H', 'Earth-1 Max', '9,550'],
             ['R5733', '215/65 R16', '16', '98H', 'G015', '10,210'],
             ['R5874', '215/65 R16', '16', '98H', 'G055', '9,790'],
             ['R8189', '215/65 R16', '16', '98H', 'G91A', '10,480'],
@@ -313,7 +318,7 @@
                         <table class="w-full text-sm text-left text-gray-700 mobile-table">
                             <thead class="text-xs text-white uppercase bg-yokohama-dark shadow-md">
                                 <tr>
-                                    ${headers.map(header => `<th scope="col" class="py-3 px-3">${header}</th>`).join('')}
+                                    ${headers.map(header => `<th scope="col" class="py-3 px-3 ">${header}</th>`).join('')}
                                 </tr>
                             </thead>
                             <tbody>
@@ -321,7 +326,7 @@
                                     <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
                                         ${row.map((cellData, colIndex) => `
                                             <td data-label="${headers[colIndex]}" class="py-3 px-3 
-                                                ${colIndex === headers.length - 1 ? 'text-right font-extrabold text-lg text-yokohama-highlight' : ''} 
+                                                ${colIndex === headers.length - 1 ? ' font-extrabold text-lg text-yokohama-highlight' : ''} 
                                                 ${colIndex === 0 || colIndex === 1 ? 'font-medium text-gray-900' : ''}">
                                                 ${cellData}
                                             </td>

@@ -22,20 +22,24 @@
             }
         }
     </script>
-    <style>
+  <style>
         /* Custom styles for better table visibility and fixed header on large screens */
         .table-container {
-            max-height: 80vh; /* Limits table height for scrollability on large displays */
+            max-height: 80vh;
+            /* Limits table height for scrollability on large displays */
             overflow-y: auto;
             padding-top: 10px;
+            
         }
+    
 
         @media (min-width: 768px) {
             .table-container thead th {
                 position: sticky;
                 top: 0;
                 z-index: 10;
-                background-color: #002B5F; /* bridgestone-dark */
+                background-color: #002B5F;
+                /* continental-blue */
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
         }
@@ -52,7 +56,8 @@
             }
 
             .mobile-table thead {
-                display: none; /* Hide standard headers on mobile */
+                display: none;
+                /* Hide standard headers on mobile */
             }
 
             .mobile-table td {
@@ -64,7 +69,6 @@
             }
 
             .mobile-table td:before {
-                /* The content attribute retrieves the header text from the data-label attribute */
                 content: attr(data-label);
                 position: absolute;
                 left: 0.75rem;
@@ -75,6 +79,7 @@
                 font-weight: 600;
                 color: #4b5563;
             }
+
             .mobile-table td:last-child {
                 border-bottom: 0;
             }
@@ -103,15 +108,15 @@
     <div class="max-w-7xl mx-auto">
         <div class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-bridgestone-dark">Bridgestone Recommended Customer Price List</h1>
-            <p class="text-lg text-gray-600 mt-2">Complete List (Effective from 22nd September 2025) [cite: 3]</p>
+            <p class="text-lg text-gray-600 mt-2">Complete List (Effective from 22nd September 2025)</p>
         </div>
 
         <main id="app-container" class="space-y-12">
             </main>
         
         <footer class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
-            <p>Prices are the **Recommended Consumer Price [Including GST]**[cite: 5].</p>
-            <p class="mt-1">The prices are subject to change without any prior notice[cite: 29].</p>
+            <p>Prices are the Recommended Consumer Price [Including GST].</p>
+            <p class="mt-1">The prices are subject to change without any prior notice.</p>
             <div class="mt-4 p-2 bg-gray-100 rounded-lg inline-block">
                 <span class="font-semibold">Key:</span>
                 TL: Tubeless Type  | TT: Tube type  | RFT: Run-Flat Tire 
@@ -299,7 +304,7 @@
             ['21', '275 35 R21 99Y', 'S001', 'TL', 'Yes', '39650']
         ];
 
-        const bridgestoneHeaders = ['Rim', 'Size', 'Pattern', 'Type(*)', 'Is RFT?', 'Recommended Consumer Price (RCP) [INR]'];
+        const bridgestoneHeaders = ['Rim', 'Size', 'Pattern', 'Type(*)', 'Is RFT?', 'RCP(in INR)'];
 
         function createTable(data, headers) {
             let tableHTML = `
@@ -313,10 +318,10 @@
                             </thead>
                             <tbody>
                                 ${data.map((row, index) => `
-                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100">
+                                    <tr class="bg-white ${index % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100 border-b border-gray-100 text-lg">
                                         ${row.map((cellData, colIndex) => `
                                             <td data-label="${headers[colIndex]}" class="py-3 px-3 
-                                                ${colIndex === headers.length - 1 ? 'text-right font-extrabold text-lg text-bridgestone-dark' : ''} 
+                                                ${colIndex === headers.length - 1 ? ' font-extrabold text-lg text-bridgestone-dark' : ''} 
                                                 ${colIndex === 0 || colIndex === 1 ? 'font-medium text-gray-900' : ''}
                                                 ${cellData === 'Yes' ? 'font-bold text-red-600' : ''}">
                                                 ${cellData}
